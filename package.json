@@ -2,6 +2,9 @@
 	"name": "exoda-contracts",
 	"version": "0.0.1",
 	"description": "Secure smart contract library for Solidity",
+	"engines": {
+		"node": ">=16.0.0"
+	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/Exoda/exoda-contracts.git"
@@ -15,8 +18,13 @@
 	"scripts": {
 		"prepare": "husky install",
 		"build": "hardhat compile",
-		"lint": "solhint -f table -c .solhint.json \"contracts/**/*.sol\" \"mocks/**/*.sol\"",
-		"lint:fix": "solhint -f table -c .solhint.json \"contracts/**/*.sol\" \"mocks/**/*.sol\" --fix",
+		"lint": "npm run lint-ts && npm run lint-sol",
+		"lint:fix": "npm run lint-ts:fix && npm run lint-sol:fix",
+		"lint-sol": "solhint -f table -c .solhint.json \"contracts/**/*.sol\" \"mocks/**/*.sol\"",
+		"lint-sol:fix": "solhint -f table -c .solhint.json \"contracts/**/*.sol\" \"mocks/**/*.sol\" --fix",
+		"lint-ts": "eslint . --format table",
+		"lint-ts:fix": "eslint . --format table --fix",
+		"pack": "ts-node scripts/SetupPackage.ts && npm pack ./package",
 		"test": "hardhat test",
 		"test:coverage": "cross-env NODE_OPTIONS=\"--max-old-space-size=2048\" hardhat coverage",
 		"test:gas": "cross-env REPORT_GAS=true yarn test"
@@ -27,6 +35,7 @@
 		"@nomiclabs/hardhat-ethers": "^2.0.6",
 		"@nomiclabs/hardhat-etherscan": "^3.0.4",
 		"@nomiclabs/hardhat-waffle": "^2.0.3",
+		"@tsconfig/node16": "^1.0.2",
 		"@typechain/ethers-v5": "^10.0.0",
 		"@typechain/hardhat": "^6.0.0",
 		"@types/chai": "^4.3.1",
@@ -40,6 +49,7 @@
 		"eslint": "^8.16.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-config-standard": "^17.0.0",
+		"eslint-formatter-table": "^7.32.1",
 		"eslint-plugin-import": "^2.26.0",
 		"eslint-plugin-node": "^11.1.0",
 		"eslint-plugin-promise": "^6.0.0",

@@ -1,5 +1,8 @@
 {
-	"extends": "solhint:recommended",
+	"extends": [
+		"solhint:default",
+		"solhint:recommended"
+	],
 	"rules": {
 		"avoid-suicide": "error",
 		"avoid-sha3": "error",
@@ -11,7 +14,7 @@
 			"error",
 			"^0.8.0"
 		],
-		"comprehensive-interface": "warn",
+		"comprehensive-interface": "error",
 		"constructor-syntax": "error",
 		"max-states-count": [
 			"error",
@@ -39,7 +42,7 @@
 		],
 		"ordering": "warn",
 		"func-visibility": [
-			"warn",
+			"error",
 			{
 				"ignoreConstructors": true
 			}
