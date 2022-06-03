@@ -1,0 +1,10 @@
+# Using whitelisting based on https://www.howtogeek.com/devops/how-to-set-up-gitignore-as-a-whitelist/
+*
+!*/
+
+# track this file
+!.gitignore
+
+# whitelist
+!LICENCE
+!README.md
