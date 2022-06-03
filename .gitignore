@@ -6,5 +6,9 @@
 !.gitignore
 
 # whitelist
-!LICENCE
-!README.md
+!/.husky/**/*
+!/commitlint.config.js
+!/LICENCE
+!/package-lock.json
+!/package.json
+!/README.md

@@ -1,0 +1,23 @@
+{
+	"name": "exoda-contracts",
+	"version": "0.0.1",
+	"description": "Secure smart contract library for Solidity",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Exoda/exoda-contracts.git"
+	},
+	"author": "Ing. Michael Goldfinger",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/Exoda/exoda-contracts/issues"
+	},
+	"homepage": "https://github.com/Exoda/exoda-contracts#readme",
+	"scripts": {
+		"prepare": "husky install"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^17.0.2",
+		"@commitlint/config-conventional": "^17.0.2",
+		"husky": "^8.0.1"
+	}
+}
