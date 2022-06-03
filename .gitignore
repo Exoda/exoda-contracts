@@ -7,8 +7,14 @@
 
 # whitelist
 !/.husky/**/*
+!/.env.example
+!/.eslintignore
+!/.eslintrc.json
+!/.solhint.json
 !/commitlint.config.js
+!/hardhat.config.ts
 !/LICENCE
 !/package-lock.json
 !/package.json
 !/README.md
+!/tsconfig.json
