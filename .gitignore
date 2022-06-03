@@ -7,8 +7,19 @@
 
 # whitelist
 !/.husky/**/*
+!/contracts/**/*
+!/interfaces/**/*
+!/scripts/**/*
+!/.env.example
+!/.eslintignore
+!/.eslintrc.json
+!/.lintstagedrc.json
+!/.npmignore
+!/.solhint.json
 !/commitlint.config.js
+!/hardhat.config.ts
 !/LICENCE
 !/package-lock.json
 !/package.json
 !/README.md
+!/tsconfig.json
