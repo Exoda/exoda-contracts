@@ -31,6 +31,10 @@ TBD
 
 ### Contribute
 
+Thre is a husy pre-commit hook in place so that comments for our commits are linted following the rules
+of [Conventional Commits](https://www.conventionalcommits.org).
+Commits disabling these check and not following the lint rules will not be accepted.
+
 TBD
 
 ### Licence
