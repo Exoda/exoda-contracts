@@ -1,0 +1,52 @@
+{{>common}}
+
+***
+
+{{#hsection}}
+{{h}} Events
+
+***
+
+{{#each (allEvents)}}
+{{#hsection}}
+{{>item}}
+{{/hsection}}
+
+{{/each}}
+{{!-- {{#each events}}
+{{#hsection}}
+{{>item}}
+{{/hsection}}
+
+{{/each}} --}}
+***
+
+{{h}} Functions
+
+***
+
+{{#each functions}}
+{{#hsection}}
+{{>item}}
+{{/hsection}}
+
+{{/each}}
+***
+{{/hsection}}
+{{!-- 
+{{h}} Original way that renders everything....
+
+{{#each items}}
+{{#hsection}}
+{{>item}}
+{{/hsection}}
+
+{{/each}} --}}
+{{!-- {{#each items}}
+{{#unless (eq nodeType "EventDefinition")}} <-- exclude one type....
+{{#hsection}}
+{{>item}}
+{{/hsection}}
+{{/unless}}
+
+{{/each}} --}}

@@ -8,7 +8,7 @@
 # whitelist
 !/.husky/**/*
 !/contracts/**/*
-!/interfaces/**/*
+!/doctemplates/**/*
 !/scripts/**/*
 !/.env.example
 !/.eslintignore

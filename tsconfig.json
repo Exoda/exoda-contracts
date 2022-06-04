@@ -17,12 +17,19 @@
 		"strict": true,
 		"esModuleInterop": true,
 		"outDir": "dist",
-		"declaration": true
+		"declaration": true,
+		"declarationMap": true,
+		"sourceMap": true,
+		"resolveJsonModule": true
 	},
+	"exclude": [
+		"dist",
+	],
 	"include": [
-		"./scripts",
-		"./test",
-		"./typechain"
+		"doctemplates/*.ts",
+		"scripts/*.ts",
+		"test/**/*.ts",
+		"typechain/**/*.ts"
 	],
 	"files": [
 		"./hardhat.config.ts"
