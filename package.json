@@ -17,7 +17,7 @@
 	"homepage": "https://github.com/Exoda/exoda-contracts#readme",
 	"scripts": {
 		"build": "hardhat compile",
-		"doc": "rm -Rf docs && hardhat docgen",
+		"doc": "ts-node scripts/SetupDocs.ts && hardhat docgen",
 		"lint": "npm run lint-ts && npm run lint-sol",
 		"lint:fix": "npm run lint-ts:fix && npm run lint-sol:fix",
 		"lint-sol": "solhint -f table -c .solhint.json \"contracts/**/*.sol\" \"mocks/**/*.sol\"",
