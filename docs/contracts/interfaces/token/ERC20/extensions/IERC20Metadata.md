@@ -1,5 +1,5 @@
 ---
-filename: contracts/interfaces/token/ERC20/extensions/IERC20Metadata
+filename: /contracts/interfaces/token/ERC20/extensions/IERC20Metadata
 type: interface
 ---
 
@@ -11,7 +11,7 @@ Interface for the optional metadata functions from the ERC20 standard.
 
 ### Implements
 
-- [IERC20](contracts/interfaces/token/ERC20/IERC20)
+- [IERC20](/contracts/interfaces/token/ERC20/IERC20)
 
 ***
 

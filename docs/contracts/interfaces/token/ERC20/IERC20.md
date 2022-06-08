@@ -1,5 +1,5 @@
 ---
-filename: contracts/interfaces/token/ERC20/IERC20
+filename: /contracts/interfaces/token/ERC20/IERC20
 type: interface
 ---
 
