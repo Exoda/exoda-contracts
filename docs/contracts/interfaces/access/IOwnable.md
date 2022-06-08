@@ -75,4 +75,4 @@ Returns the current owner.
 | ---- | ---- | ----------- |
 | [0] | address | The current owner. |
 
-[Back](index)
+[Back](/index)

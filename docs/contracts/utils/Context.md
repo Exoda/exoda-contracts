@@ -42,4 +42,4 @@ returns the data of the transaction.
 | ---- | ---- | ----------- |
 | [0] | bytes | The data of the transaction. |
 
-[Back](index)
+[Back](/index)
