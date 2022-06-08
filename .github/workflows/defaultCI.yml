@@ -26,7 +26,30 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm i
-    - run: npm run lint
+        
+    - name: Prepare npm
+      run: npm i
+    
+    - name: Run Lint
+      run: npm run lint
+    
+    - name: Build contracts
     - run: npm run build
-    - run: npm run test
+    
+    - name: Run Tests
+      run: npm run test
+    
+    - name: Build documentation
+      run: |
+        echo ${{ github.ref }}
+        npm run doc
+        git add doc
+        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git commit -m "ci: Automated doc generation push" -a | exit 0
+        
+    - name: Push changes
+      if: github.ref == 'refs/heads/master'
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
