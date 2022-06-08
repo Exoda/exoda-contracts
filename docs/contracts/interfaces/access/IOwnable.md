@@ -1,5 +1,5 @@
 ---
-filename: contracts/interfaces/access/IOwnable
+filename: /contracts/interfaces/access/IOwnable
 type: interface
 ---
 

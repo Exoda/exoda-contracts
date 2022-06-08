@@ -48,5 +48,10 @@ function extractDocPath(dic: DocItemContext): string
 {
 	const regex = /\.md$/;
 	if (!dic.page) return "/index";
-	return dic.page.replace(regex, "");
+	let result = dic.page.replace(regex, "");
+	if (result[0] !== "/")
+	{
+		result = "/" + result;
+	}
+	return result;
 }

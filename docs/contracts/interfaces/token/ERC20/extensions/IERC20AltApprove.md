@@ -1,5 +1,5 @@
 ---
-filename: contracts/interfaces/token/ERC20/extensions/IERC20AltApprove
+filename: /contracts/interfaces/token/ERC20/extensions/IERC20AltApprove
 type: interface
 ---
 

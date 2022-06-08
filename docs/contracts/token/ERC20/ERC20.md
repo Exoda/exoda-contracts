@@ -1,5 +1,5 @@
 ---
-filename: contracts/token/ERC20/ERC20
+filename: /contracts/token/ERC20/ERC20
 type: contract
 ---
 
@@ -34,10 +34,10 @@ allowances. See {IERC20-approve}.
 
 ### Implements
 
-- [IERC20AltApprove](contracts/interfaces/token/ERC20/extensions/IERC20AltApprove)
-- [IERC20Metadata](contracts/interfaces/token/ERC20/extensions/IERC20Metadata)
-- [IERC20](contracts/interfaces/token/ERC20/IERC20)
-- [Context](contracts/utils/Context)
+- [IERC20AltApprove](/contracts/interfaces/token/ERC20/extensions/IERC20AltApprove)
+- [IERC20Metadata](/contracts/interfaces/token/ERC20/extensions/IERC20Metadata)
+- [IERC20](/contracts/interfaces/token/ERC20/IERC20)
+- [Context](/contracts/utils/Context)
 
 ***
 

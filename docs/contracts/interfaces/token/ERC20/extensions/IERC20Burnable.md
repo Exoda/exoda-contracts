@@ -1,5 +1,5 @@
 ---
-filename: contracts/interfaces/token/ERC20/extensions/IERC20Burnable
+filename: /contracts/interfaces/token/ERC20/extensions/IERC20Burnable
 type: interface
 ---
 
@@ -12,8 +12,8 @@ and those that they have an allowance for.
 
 ### Implements
 
-- [IERC20Metadata](contracts/interfaces/token/ERC20/extensions/IERC20Metadata)
-- [IERC20](contracts/interfaces/token/ERC20/IERC20)
+- [IERC20Metadata](/contracts/interfaces/token/ERC20/extensions/IERC20Metadata)
+- [IERC20](/contracts/interfaces/token/ERC20/IERC20)
 
 ***
 

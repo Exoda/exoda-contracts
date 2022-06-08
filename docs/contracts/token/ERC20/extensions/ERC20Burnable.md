@@ -1,5 +1,5 @@
 ---
-filename: contracts/token/ERC20/extensions/ERC20Burnable
+filename: /contracts/token/ERC20/extensions/ERC20Burnable
 type: contract
 ---
 
@@ -13,12 +13,12 @@ recognized off-chain (via event analysis).
 
 ### Implements
 
-- [IERC20Burnable](contracts/interfaces/token/ERC20/extensions/IERC20Burnable)
-- [ERC20](contracts/token/ERC20/ERC20)
-- [IERC20AltApprove](contracts/interfaces/token/ERC20/extensions/IERC20AltApprove)
-- [IERC20Metadata](contracts/interfaces/token/ERC20/extensions/IERC20Metadata)
-- [IERC20](contracts/interfaces/token/ERC20/IERC20)
-- [Context](contracts/utils/Context)
+- [IERC20Burnable](/contracts/interfaces/token/ERC20/extensions/IERC20Burnable)
+- [ERC20](/contracts/token/ERC20/ERC20)
+- [IERC20AltApprove](/contracts/interfaces/token/ERC20/extensions/IERC20AltApprove)
+- [IERC20Metadata](/contracts/interfaces/token/ERC20/extensions/IERC20Metadata)
+- [IERC20](/contracts/interfaces/token/ERC20/IERC20)
+- [Context](/contracts/utils/Context)
 
 ***
 
