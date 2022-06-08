@@ -102,4 +102,4 @@ Internal function without access restriction.
 
 Emits an {OwnershipTransferred} event indicating the transfered ownership.
 
-[Back](index)
+[Back](/index)
