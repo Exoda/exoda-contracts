@@ -8,6 +8,7 @@
 # whitelist
 !/.husky/**/*
 !/contracts/**/*
+!/docs/**/*
 !/docstatics/**/*
 !/doctemplates/**/*
 !/scripts/**/*
