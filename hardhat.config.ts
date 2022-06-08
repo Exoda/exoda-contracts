@@ -6,6 +6,23 @@ import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
+import "solidity-docgen";
+
+import { PageAssigner } from "solidity-docgen/dist/site";
+
+const excludePath: RegExp[] = [/\/mocks\//];
+
+const pa: PageAssigner = (item, file, config) =>
+{
+	for (const excludeMe of excludePath)
+	{
+		if (excludeMe.test(file.absolutePath))
+		{
+			return undefined;
+		}
+	}
+	return file.absolutePath.replace(".sol", config.pageExtension);
+};
 
 dotenv.config();
 
@@ -20,6 +37,10 @@ const accounts = {
 // Go to https://hardhat.org/config/ to learn more
 
 const config: HardhatUserConfig = {
+	docgen: {
+		pages: pa, // "files",
+		templates: "doctemplates"
+	},
 	solidity: {
 		compilers: [
 			{
