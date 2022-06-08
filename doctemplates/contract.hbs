@@ -1,6 +1,21 @@
 {{fileHeader}}
 
 {{>common}}
+{{#if (directParents)}}
+
+***
+
+{{#hsection}}
+{{h}} Implements
+
+{{#each (directParents)}}
+{{#hsection}}
+- [{{this.name}}]({{this.docpath}})
+{{/hsection}}
+
+{{/each}}
+{{/hsection}}
+{{/if}}
 {{#if (allEvents)}}
 
 ***
