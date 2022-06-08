@@ -69,9 +69,7 @@ const config: HardhatUserConfig = {
 		coinmarketcap: process.env.COINMARKETCAP_API_KEY,
 		currency: "EUR",
 		excludeContracts: [
-			"contracts/mocks/",
-			"contracts/cobra/mocks/",
-			"contracts/dnf libraries/"
+			"contracts/mocks/"
 		]
 	},
 	etherscan: {

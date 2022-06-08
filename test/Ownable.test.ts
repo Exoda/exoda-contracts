@@ -3,10 +3,8 @@ import { ethers } from "hardhat";
 import { expect } from "chai";
 import { ContractFactory } from "ethers";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-
-import { ADDRESS_ZERO, EmitOnlyThis } from "../helpers";
-
-import { IOwnable } from "../../typechain-types";
+import { ADDRESS_ZERO, EmitOnlyThis } from "./helpers";
+import { IOwnable } from "../typechain-types";
 
 // * Unit tests are grouped in contexts.
 // * Ever group represents an derived class or interface.
@@ -23,7 +21,7 @@ describe("Ownable", () =>
 	let Carol: SignerWithAddress;
 	let Ownable: IOwnable;
 
-	before(async() =>
+	before(async () =>
 	{
 		OwnableFactory = await ethers.getContractFactory("Ownable");
 		Signers = await ethers.getSigners();
@@ -32,15 +30,15 @@ describe("Ownable", () =>
 		Carol = Signers[2];
 	});
 
-	context("this", async() =>
+	context("this", async () =>
 	{
-		beforeEach(async() =>
+		beforeEach(async () =>
 		{
 			Ownable = (await OwnableFactory.deploy()) as IOwnable;
 			await Ownable.deployed();
 		});
 
-		it("Ownable.constructor: Should emit `OwnershipTransferred` event", async() =>
+		it("Ownable.constructor: Should emit `OwnershipTransferred` event", async () =>
 		{
 			// Arrange
 			// Act
@@ -50,7 +48,7 @@ describe("Ownable", () =>
 			await EmitOnlyThis(result, Ownable, "OwnershipTransferred(address,address)");
 		});
 
-		it("Ownable.constructor: Should set creator as owner", async() =>
+		it("Ownable.constructor: Should set creator as owner", async () =>
 		{
 			// Arrange
 			// Act
@@ -61,7 +59,7 @@ describe("Ownable", () =>
 			await EmitOnlyThis(Ownable.deployTransaction, Ownable, "OwnershipTransferred(address,address)");
 		});
 
-		it("Ownable.owner: Should get current owner", async() =>
+		it("Ownable.owner: Should get current owner", async () =>
 		{
 			// Arrange
 			// Act
@@ -73,7 +71,7 @@ describe("Ownable", () =>
 			expect(resultOwnerBob).to.equal(Bob.address);
 		});
 
-		it("Ownable.renounceOwnership: Should emit `OwnershipTransferred` event", async() =>
+		it("Ownable.renounceOwnership: Should emit `OwnershipTransferred` event", async () =>
 		{
 			// Arrange
 			// Act
@@ -83,7 +81,7 @@ describe("Ownable", () =>
 			await EmitOnlyThis(result, Ownable, "OwnershipTransferred(address,address)");
 		});
 
-		it("Ownable.renounceOwnership: Should let owner renounce ownership", async() =>
+		it("Ownable.renounceOwnership: Should let owner renounce ownership", async () =>
 		{
 			// Arrange
 			// Act
@@ -94,17 +92,17 @@ describe("Ownable", () =>
 			await EmitOnlyThis(result, Ownable, "OwnershipTransferred(address,address)");
 		});
 
-		it("Ownable.renounceOwnership: Should not let non-owner renounce ownership", async() =>
+		it("Ownable.renounceOwnership: Should not let non-owner renounce ownership", async () =>
 		{
 			// Arrange
 			// Act
 			const result = Ownable.connect(Bob).renounceOwnership();
 			// Assert
-			expect(result).to.revertedWith("Ownable: caller is not the owner");
+			await expect(result).to.revertedWith("Ownable: caller is not the owner");
 			expect(await Ownable.owner()).to.equal(Alice.address);
 		});
 
-		it("Ownable.transferOwnership: Should emit `OwnershipTransferred` event", async() =>
+		it("Ownable.transferOwnership: Should emit `OwnershipTransferred` event", async () =>
 		{
 			// Arrange
 			// Act
@@ -114,7 +112,7 @@ describe("Ownable", () =>
 			await EmitOnlyThis(result, Ownable, "OwnershipTransferred(address,address)");
 		});
 
-		it("Ownable.transferOwnership: Should let owner transfer ownership", async() =>
+		it("Ownable.transferOwnership: Should let owner transfer ownership", async () =>
 		{
 			// Arrange
 			// Act
@@ -125,23 +123,23 @@ describe("Ownable", () =>
 			await EmitOnlyThis(result, Ownable, "OwnershipTransferred(address,address)");
 		});
 
-		it("Ownable.transferOwnership: Should not let owner transfer ownership to zero address", async() =>
+		it("Ownable.transferOwnership: Should not let owner transfer ownership to zero address", async () =>
 		{
 			// Arrange
 			// Act
 			const result = Ownable.transferOwnership(ADDRESS_ZERO);
 			// Assert
-			expect(result).to.revertedWith("Ownable: new owner is the zero address");
+			await expect(result).to.revertedWith("Ownable: new owner is address(0)");
 			expect(await Ownable.owner()).to.equal(Alice.address);
 		});
 
-		it("Ownable.transferOwnership: Should not let non-owner transfer ownership", async() =>
+		it("Ownable.transferOwnership: Should not let non-owner transfer ownership", async () =>
 		{
 			// Arrange
 			// Act
 			const result = Ownable.connect(Carol).transferOwnership(Bob.address);
 			// Assert
-			expect(result).to.revertedWith("Ownable: caller is not the owner");
+			await expect(result).to.revertedWith("Ownable: caller is not the owner");
 			expect(await Ownable.owner()).to.equal(Alice.address);
 		});
 	});

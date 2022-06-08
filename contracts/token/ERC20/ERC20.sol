@@ -248,8 +248,6 @@ contract ERC20 is Context, IERC20Metadata, IERC20AltApprove {
 	function _burn(address account, uint256 amount) internal virtual {
 		require(account != address(0), "ERC20: burn from address(0)");
 
-		_beforeTokenTransfer(account, address(0), amount);
-
 		uint256 accountBalance = _balances[account];
 		require(accountBalance >= amount, "ERC20: burn exceeds balance");
 		unchecked {
@@ -258,8 +256,6 @@ contract ERC20 is Context, IERC20Metadata, IERC20AltApprove {
 		_totalSupply -= amount;
 
 		emit Transfer(account, address(0), amount);
-
-		_afterTokenTransfer(account, address(0), amount);
 	}
 
 	/** @notice Creates `amount` tokens and assigns them to `account`, increasing
@@ -273,15 +269,11 @@ contract ERC20 is Context, IERC20Metadata, IERC20AltApprove {
 	*/
 	function _mint(address account, uint256 amount) internal virtual
 	{
-		require(account != address(0), "ERC20: mint to the zero address");
-
-		_beforeTokenTransfer(address(0), account, amount);
+		require(account != address(0), "ERC20: mint to address(0)");
 
 		_totalSupply += amount;
 		_balances[account] += amount;
 		emit Transfer(address(0), account, amount);
-
-		_afterTokenTransfer(address(0), account, amount);
 	}
 
 	/**
@@ -322,8 +314,6 @@ contract ERC20 is Context, IERC20Metadata, IERC20AltApprove {
 		require(from != address(0), "ERC20: transfer from address(0)");
 		require(to != address(0), "ERC20: transfer to address(0)");
 
-		_beforeTokenTransfer(from, to, amount);
-
 		uint256 fromBalance = _balances[from];
 		require(fromBalance >= amount, "ERC20: transfer exceeds balance");
 		unchecked {
@@ -332,43 +322,5 @@ contract ERC20 is Context, IERC20Metadata, IERC20AltApprove {
 		_balances[to] += amount;
 
 		emit Transfer(from, to, amount);
-
-		_afterTokenTransfer(from, to, amount);
 	}
-
-	/**
-	* @notice Hook that is called after any transfer of tokens. This includes
-	* minting and burning.
-	*
-	* Calling conditions:
-	*
-	* - when `from` and `to` are both non-zero, `amount` of ``from``'s tokens
-	* has been transferred to `to`.
-	* - when `from` is zero, `amount` tokens have been minted for `to`.
-	* - when `to` is zero, `amount` of ``from``'s tokens have been burned.
-	* - `from` and `to` are never both zero.
-	*
-	* To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
-	*/
-	function _afterTokenTransfer(address from, address to, uint256 amount) internal pure virtual
-	{}  // solhint-disable-line no-empty-blocks
-
-	/**
-	* @notice Hook that is called before any transfer of tokens. This includes
-	* minting and burning.
-	*
-	* Calling conditions:
-	*
-	* - when `from` and `to` are both non-zero, `amount` of ``from``'s tokens
-	* will be transferred to `to`.
-	* - when `from` is zero, `amount` tokens will be minted for `to`.
-	* - when `to` is zero, `amount` of ``from``'s tokens will be burned.
-	* - `from` and `to` are never both zero.
-	*
-	* To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
-	*/
-	function _beforeTokenTransfer(address from, address to, uint256 amount) internal pure virtual
-	{} // solhint-disable-line no-empty-blocks
-
-
 }
