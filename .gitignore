@@ -11,6 +11,7 @@
 !/docstatics/**/*
 !/doctemplates/**/*
 !/scripts/**/*
+!/tests/**/*
 !/.env.example
 !/.eslintignore
 !/.eslintrc.json
