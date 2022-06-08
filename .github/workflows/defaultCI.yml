@@ -21,6 +21,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
@@ -34,7 +35,7 @@ jobs:
       run: npm run lint
     
     - name: Build contracts
-    - run: npm run build
+      run: npm run build
     
     - name: Run Tests
       run: npm run test
@@ -43,7 +44,7 @@ jobs:
       run: |
         echo ${{ github.ref }}
         npm run doc
-        git add doc
+        git add docs
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
         git commit -m "ci: Automated doc generation push" -a | exit 0
