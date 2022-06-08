@@ -3,6 +3,5 @@
 
 npx --no -- lint-staged
 npm run doc
-git add docs
-git commit --amend --no-edit
+git commit --amend --no-edit -a
 npx --no -- commitlint --edit
