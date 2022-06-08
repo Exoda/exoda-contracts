@@ -26,6 +26,7 @@
 			"error",
 			"unix"
 		],
+		"node/no-missing-import": ["error", {"allowModules": ["solidity-ast"]}],
 		"node/no-unsupported-features/es-syntax": [
 			"error",
 			{

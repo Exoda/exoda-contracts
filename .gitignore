@@ -8,6 +8,7 @@
 # whitelist
 !/.husky/**/*
 !/contracts/**/*
+!/docstatics/**/*
 !/doctemplates/**/*
 !/scripts/**/*
 !/.env.example
