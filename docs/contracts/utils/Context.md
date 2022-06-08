@@ -2,6 +2,7 @@
 filename: contracts/utils/Context
 type: contract
 ---
+
 ## Context
 
 Provides information about the current execution context, including the
@@ -15,15 +16,7 @@ This contract is only required for intermediate, library-like contracts.
 
 ***
 
-### Events
-
-***
-
-***
-
 ### Functions
-
-***
 
 #### _msgSender
 
@@ -49,5 +42,4 @@ returns the data of the transaction.
 | ---- | ---- | ----------- |
 | [0] | bytes | The data of the transaction. |
 
-***
-
+[Back](index)
