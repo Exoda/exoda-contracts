@@ -41,6 +41,7 @@ jobs:
       run: npm run test
     
     - name: Build documentation
+      if: github.ref == 'refs/heads/main'
       run: |
         echo ${{ github.ref }}
         npm run doc
