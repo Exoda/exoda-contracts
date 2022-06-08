@@ -28,7 +28,6 @@
 		],
 		"node/no-missing-import": ["error", {
 			"allowModules": ["solidity-ast"],
-			"resolvePaths": ["/typechain-types"],
 			"tryExtensions": [
 				".js",
 				".jsx",
