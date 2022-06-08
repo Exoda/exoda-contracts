@@ -27,7 +27,8 @@
 			"unix"
 		],
 		"node/no-missing-import": ["error", {
-			"allowModules": ["solidity-ast", "typechain-types"],
+			"allowModules": ["solidity-ast"],
+			"resolvePaths": ["/typechain-types"],
 			"tryExtensions": [
 				".js",
 				".jsx",
