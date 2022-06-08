@@ -285,7 +285,6 @@ describe("ERC20", () =>
 			await EmitOnlyThis(result, ERC20, "Transfer(address,address,uint256)");
 		});
 
-
 		it("ERC20.transferFrom: Should not allow transfer more than balance", async () =>
 		{
 			// Arrange

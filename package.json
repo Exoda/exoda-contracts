@@ -1,5 +1,5 @@
 {
-	"name": "exoda-contracts",
+	"name": "@exoda/exoda-contracts",
 	"version": "0.0.1",
 	"description": "Secure smart contract library for Solidity",
 	"engines": {
@@ -25,6 +25,7 @@
 		"lint-ts": "eslint . --format table",
 		"lint-ts:fix": "eslint . --format table --fix",
 		"pack": "ts-node scripts/SetupPackage.ts && npm pack ./package",
+		"publish": "ts-node scripts/SetupPackage.ts && npm publish ./package --access public",
 		"prepare": "husky install",
 		"test": "npm run build && hardhat test",
 		"test:coverage": "npm run build && cross-env NODE_OPTIONS=\"--max-old-space-size=2048\" hardhat coverage",

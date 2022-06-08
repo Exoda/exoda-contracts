@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "../IERC20.sol";
+import "../extensions/IERC20Metadata.sol";
 
 /**
  * @title ERC20Burnable interface.
@@ -9,7 +9,7 @@ import "../IERC20.sol";
  * @notice Interface for the extension of {ERC20} that allows token holders to destroy both their own tokens
  * and those that they have an allowance for.
  */
-interface IERC20Burnable is IERC20
+interface IERC20Burnable is IERC20Metadata
 {
 	/**
 	* @notice Destroys {amount} tokens from the caller.

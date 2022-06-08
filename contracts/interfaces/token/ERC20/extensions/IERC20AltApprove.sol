@@ -7,7 +7,7 @@ import "../IERC20.sol";
 /// @author Ing. Michael Goldfinger
 /// @notice Interface for an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}.
 /// @dev This is not part of the ERC20 specification.
-interface IERC20AltApprove is IERC20
+interface IERC20AltApprove
 {
 	/**
 	* @notice Atomically decreases the allowance granted to `spender` by the caller.
