@@ -2,6 +2,7 @@
 filename: contracts/access/Ownable
 type: contract
 ---
+
 ## Ownable
 
 Contract module which provides a basic access control mechanism, where
@@ -15,8 +16,6 @@ _This module is used through inheritance. It will make available the modifier
 ***
 
 ### Events
-
-***
 
 #### OwnershipTransferred
 
@@ -34,8 +33,6 @@ Emitted when ownership is moved from one address to another.
 ***
 
 ### Functions
-
-***
 
 #### constructor
 
@@ -105,5 +102,4 @@ Internal function without access restriction.
 
 Emits an {OwnershipTransferred} event indicating the transfered ownership.
 
-***
-
+[Back](index)

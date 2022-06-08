@@ -2,6 +2,7 @@
 filename: contracts/interfaces/access/IOwnable
 type: interface
 ---
+
 ## IOwnable
 
 This interface contains all visible functions and events for the Ownable contract module.
@@ -9,8 +10,6 @@ This interface contains all visible functions and events for the Ownable contrac
 ***
 
 ### Events
-
-***
 
 #### OwnershipTransferred
 
@@ -28,8 +27,6 @@ Emitted when ownership is moved from one address to another.
 ***
 
 ### Functions
-
-***
 
 #### renounceOwnership
 
@@ -78,5 +75,4 @@ Returns the current owner.
 | ---- | ---- | ----------- |
 | [0] | address | The current owner. |
 
-***
-
+[Back](index)

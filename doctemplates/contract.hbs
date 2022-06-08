@@ -1,12 +1,12 @@
 {{fileHeader}}
+
 {{>common}}
+{{#if (allEvents)}}
 
 ***
 
 {{#hsection}}
 {{h}} Events
-
-***
 
 {{#each (allEvents)}}
 {{#hsection}}
@@ -14,17 +14,14 @@
 {{/hsection}}
 
 {{/each}}
-{{!-- {{#each events}}
-{{#hsection}}
-{{>item}}
 {{/hsection}}
+{{/if}}
+{{#if functions}}
 
-{{/each}} --}}
 ***
 
+{{#hsection}}
 {{h}} Functions
-
-***
 
 {{#each functions}}
 {{#hsection}}
@@ -32,8 +29,8 @@
 {{/hsection}}
 
 {{/each}}
-***
 {{/hsection}}
+{{/if}}
 {{!-- 
 {{h}} Original way that renders everything....
 
