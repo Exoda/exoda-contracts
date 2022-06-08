@@ -2,4 +2,5 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 npx --no -- lint-staged
-npx --no -- commitlint --edit 
+npm run doc
+npx --no -- commitlint --edit
