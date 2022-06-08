@@ -1,10 +1,8 @@
 name: Clean Workflow Logs
 
 on:
-  workflow_run:
-    workflows: [Default CI]
-    types:
-      - completed
+  push:
+    branches: [ "main" ]
 
 jobs:
   clean-logs:
