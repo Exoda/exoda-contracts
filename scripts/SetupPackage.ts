@@ -10,7 +10,7 @@ function main()
 	const rootFolder = path.join(__dirname, "..");
 	const packageFolder = path.join(rootFolder, "package");
 	const contractsFolder = path.join(rootFolder, "contracts");
-	// const interfacesFolder = path.join(rootFolder, "interfaces");
+	const mockFolder = path.join(packageFolder, "contracts/mocks");
 
 	// Clean up package folder
 	fs.rmSync(packageFolder, { recursive: true, force: true });
@@ -18,6 +18,8 @@ function main()
 
 	// Copy contracts to package folder
 	fs.cpSync(contractsFolder, path.join(packageFolder, "contracts"), { force: true, recursive: true });
+	// Remove mocks
+	fs.rmSync(mockFolder, { recursive: true, force: true });
 	// fs.cpSync(interfacesFolder, path.join(packageFolder, "interfaces"), { force: true, recursive: true });
 
 	// Copy package.json to package folder

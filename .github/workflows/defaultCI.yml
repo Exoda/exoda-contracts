@@ -30,12 +30,12 @@ jobs:
         
     - name: Prepare npm
       run: npm i
+      
+    - name: Run Build
+      run: npm run build
     
     - name: Run Lint
       run: npm run lint
-    
-    - name: Build contracts
-      run: npm run build
     
     - name: Run Tests
       run: npm run test
