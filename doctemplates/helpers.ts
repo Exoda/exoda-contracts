@@ -12,7 +12,7 @@ export function allEvents(this: DocItemWithContext)
 
 		const r = parents.flatMap(p => [...findAll("EventDefinition", p)]);
 		// console.log(`Events: ${this.canonicalName} -> ${r.map(e => e.name)}`);
-		return r;
+		return r.sort((a, b) => ((a.name??"") > (b.name??"")) ? 1 : -1);
 	}
 }
 
@@ -24,7 +24,7 @@ export function directParents(this: DocItemWithContext)
 		const parents = this.linearizedBaseContracts.filter(lbc => lbc !== this.id).map(deref("ContractDefinition"));
 
 		const r = parents.flatMap(p => [{ name: p.canonicalName, docpath: extractDocPath((p as DocItemWithContext)[DOC_ITEM_CONTEXT]) }]);
-		return r;
+		return r.sort((a, b) => ((a.name??"") > (b.name??"")) ? 1 : -1);
 	}
 }
 
