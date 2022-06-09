@@ -19,6 +19,7 @@
 !/.eslintrc.json
 !/.lintstagedrc.json
 !/.npmignore
+!/.solcover.js
 !/.solhint.json
 !/commitlint.config.js
 !/hardhat.config.ts
