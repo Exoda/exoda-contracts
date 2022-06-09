@@ -34,30 +34,14 @@ allowances. See {IERC20-approve}.
 
 ### Implements
 
+- [Context](/contracts/utils/Context)
+- [IERC20](/contracts/interfaces/token/ERC20/IERC20)
 - [IERC20AltApprove](/contracts/interfaces/token/ERC20/extensions/IERC20AltApprove)
 - [IERC20Metadata](/contracts/interfaces/token/ERC20/extensions/IERC20Metadata)
-- [IERC20](/contracts/interfaces/token/ERC20/IERC20)
-- [Context](/contracts/utils/Context)
 
 ***
 
 ### Events
-
-#### Transfer
-
-```solidity
-event Transfer(address from, address to, uint256 value)
-```
-
-Emitted when {value} tokens are moved from one address {from} to another {to}.
-
-NOTE: {value} may be zero.
-
-| Name | Type | Indexed | Description |
-| ---- | ---- | ------- | ----------- |
-| from | address | true | (indexed) The origin of the transfer. |
-| to | address | true | (indexed) The target of the transfer. |
-| value | uint256 | false | The amount of tokens that got transfered. |
 
 #### Approval
 
@@ -74,6 +58,22 @@ NOTE: {value} may be zero.
 | owner | address | true | (indexed) The owner of the tokens. |
 | spender | address | true | (indexed) The spender for the tokens. |
 | value | uint256 | false | The amount of tokens that got an allowance. |
+
+#### Transfer
+
+```solidity
+event Transfer(address from, address to, uint256 value)
+```
+
+Emitted when {value} tokens are moved from one address {from} to another {to}.
+
+NOTE: {value} may be zero.
+
+| Name | Type | Indexed | Description |
+| ---- | ---- | ------- | ----------- |
+| from | address | true | (indexed) The origin of the transfer. |
+| to | address | true | (indexed) The target of the transfer. |
+| value | uint256 | false | The amount of tokens that got transfered. |
 
 ***
 

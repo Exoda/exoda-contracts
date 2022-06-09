@@ -17,8 +17,8 @@ _This module is used through inheritance. It will make available the modifier
 
 ### Implements
 
-- [IOwnable](/contracts/interfaces/access/IOwnable)
 - [Context](/contracts/utils/Context)
+- [IOwnable](/contracts/interfaces/access/IOwnable)
 
 ***
 
