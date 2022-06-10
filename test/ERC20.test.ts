@@ -332,6 +332,7 @@ describe("ERC20", () =>
 	context("IERC20AltApprove", async () =>
 	{
 		const AltApprove = () => Contract as IERC20AltApprove;
+		const TestOnlyERC20 = () => Contract as IERC20;
 
 		beforeEach(async () =>
 		{
@@ -348,7 +349,7 @@ describe("ERC20", () =>
 			const result = await AltApprove().decreaseAllowance(Bob.address, 50);
 			// Assert
 			await EmitOnlyThis(result, Contract, "Approval(address,address,uint256)");
-			expect(await AltApprove().allowance(Alice.address, Bob.address)).to.equal(50);
+			expect(await TestOnlyERC20().allowance(Alice.address, Bob.address)).to.equal(50);
 		});
 
 		it("ERC20.decreaseAllowance: Should allow token holder to change allowance multible times", async () =>
@@ -361,7 +362,7 @@ describe("ERC20", () =>
 			await AltApprove().decreaseAllowance(Bob.address, 10);
 			await AltApprove().decreaseAllowance(Bob.address, 20);
 			// Assert
-			expect(await AltApprove().allowance(Alice.address, Bob.address)).to.equal(20);
+			expect(await TestOnlyERC20().allowance(Alice.address, Bob.address)).to.equal(20);
 		});
 
 		it("ERC20.decreaseAllowance: Should not allow token holder to change allowance below 0", async () =>
@@ -373,7 +374,7 @@ describe("ERC20", () =>
 			const result = AltApprove().decreaseAllowance(Bob.address, 101);
 			// Assert
 			await expect(result).to.revertedWith("ERC20: reduced allowance below 0");
-			expect(await AltApprove().allowance(Alice.address, Bob.address)).to.equal(100);
+			expect(await TestOnlyERC20().allowance(Alice.address, Bob.address)).to.equal(100);
 		});
 
 		it("ERC20.increaseAllowance: Should allow token holder to change allowance", async () =>
@@ -384,7 +385,7 @@ describe("ERC20", () =>
 			const result = await AltApprove().increaseAllowance(Bob.address, 50);
 			// Assert
 			await EmitOnlyThis(result, Contract, "Approval(address,address,uint256)");
-			expect(await AltApprove().allowance(Alice.address, Bob.address)).to.equal(50);
+			expect(await TestOnlyERC20().allowance(Alice.address, Bob.address)).to.equal(50);
 		});
 
 		it("ERC20.increaseAllowance: Should allow token holder to change allowance above hold tokens", async () =>
@@ -395,7 +396,7 @@ describe("ERC20", () =>
 			const result = await AltApprove().increaseAllowance(Bob.address, 200);
 			// Assert
 			await EmitOnlyThis(result, Contract, "Approval(address,address,uint256)");
-			expect(await AltApprove().allowance(Alice.address, Bob.address)).to.equal(200);
+			expect(await TestOnlyERC20().allowance(Alice.address, Bob.address)).to.equal(200);
 		});
 
 		it("ERC20.increaseAllowance: Should allow token holder to change allowance multible times", async () =>
@@ -407,7 +408,7 @@ describe("ERC20", () =>
 			await AltApprove().increaseAllowance(Bob.address, 10);
 			await AltApprove().increaseAllowance(Bob.address, 20);
 			// Assert
-			expect(await AltApprove().allowance(Alice.address, Bob.address)).to.equal(80);
+			expect(await TestOnlyERC20().allowance(Alice.address, Bob.address)).to.equal(80);
 		});
 	});
 
