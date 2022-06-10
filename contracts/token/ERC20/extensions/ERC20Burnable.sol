@@ -21,7 +21,7 @@ contract ERC20Burnable is Context, ERC20, IERC20Burnable
 	* All two of these values are immutable: they can only be set once during
 	* construction.
 	*/
-	constructor(string memory name_, string memory symbol_) ERC20(name_, symbol_)
+	constructor(string memory tokenName, string memory tokenSymbol) ERC20(tokenName, tokenSymbol)
 	{} // solhint-disable-line no-empty-blocks
 
 	/**
