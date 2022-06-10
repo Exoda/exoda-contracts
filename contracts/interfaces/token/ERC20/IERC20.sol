@@ -9,16 +9,6 @@ pragma solidity ^0.8.0;
 interface IERC20
 {
 	/**
-	 * @notice Emitted when {value} tokens are moved from one address {from} to another {to}.
-	 *
-	 * NOTE: {value} may be zero.
-	 * @param from (indexed) The origin of the transfer.
-	 * @param to (indexed) The target of the transfer.
-	 * @param value The amount of tokens that got transfered.
-	 */
-	event Transfer(address indexed from, address indexed to, uint256 value);
-
-	/**
 	 * @notice Emitted when the allowance of a {spender} for an {owner} is set to a new value.
 	 *
 	 * NOTE: {value} may be zero.
@@ -27,6 +17,16 @@ interface IERC20
 	 * @param value The amount of tokens that got an allowance.
 	 */
 	event Approval(address indexed owner, address indexed spender, uint256 value);
+
+	/**
+	 * @notice Emitted when {value} tokens are moved from one address {from} to another {to}.
+	 *
+	 * NOTE: {value} may be zero.
+	 * @param from (indexed) The origin of the transfer.
+	 * @param to (indexed) The target of the transfer.
+	 * @param value The amount of tokens that got transfered.
+	 */
+	event Transfer(address indexed from, address indexed to, uint256 value);
 
 	/**
 	* @dev Sets `amount` as the allowance of `spender` over the caller's tokens.

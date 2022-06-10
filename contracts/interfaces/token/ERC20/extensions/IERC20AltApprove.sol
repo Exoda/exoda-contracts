@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "../IERC20.sol";
-
 /// @title ERC20Metadata interface.
 /// @author Ing. Michael Goldfinger
 /// @notice Interface for an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}.
@@ -38,4 +36,12 @@ interface IERC20AltApprove
 	* - `spender` cannot be the zero address.
 	*/
 	function increaseAllowance(address spender, uint256 addedValue) external returns (bool);
+
+	/**
+	* @dev Returns the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through {transferFrom}.
+	* This is zero by default.
+	*
+	* This value changes when {approve}, {increaseAllowance}, {decreseAllowance} or {transferFrom} are called.
+	*/
+	function allowance(address owner, address spender) external view returns (uint256);
 }

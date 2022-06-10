@@ -49,4 +49,15 @@ Requirements:
 
 - `spender` cannot be the zero address.
 
+#### allowance
+
+```solidity
+function allowance(address owner, address spender) external view returns (uint256)
+```
+
+_Returns the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through {transferFrom}.
+This is zero by default.
+
+This value changes when {approve}, {increaseAllowance}, {decreseAllowance} or {transferFrom} are called._
+
 [Back](/index)

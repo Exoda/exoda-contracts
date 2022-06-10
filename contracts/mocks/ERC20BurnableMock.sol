@@ -12,7 +12,7 @@ interface IERC20BurnableMock is IERC20Burnable
 // solhint-disable-next-line no-empty-blocks
 contract ERC20BurnableMock is ERC20Burnable, IERC20BurnableMock
 {
-	constructor(string memory name, string memory symbol) ERC20(name, symbol)
+	constructor(string memory name, string memory symbol) ERC20Burnable(name, symbol)
 	{} // solhint-disable-line no-empty-blocks
 
 	/// @notice Creates `amount` token to `to`.
