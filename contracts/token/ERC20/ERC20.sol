@@ -3,6 +3,7 @@ pragma solidity ^0.8.0;
 
 import "../../interfaces/token/ERC20/extensions/IERC20AltApprove.sol";
 import "../../interfaces/token/ERC20/extensions/IERC20Metadata.sol";
+import "../../interfaces/token/ERC20/IERC20.sol";
 import "../../utils/Context.sol";
 
 /**
@@ -31,12 +32,14 @@ import "../../utils/Context.sol";
 * functions have been added to mitigate the well-known issues around setting
 * allowances. See {IERC20-approve}.
 */
-contract ERC20 is Context, IERC20Metadata, IERC20AltApprove {
-	mapping(address => uint256) private _balances;
-	mapping(address => mapping(address => uint256)) private _allowances;
-	uint256 private _totalSupply;
+contract ERC20 is IERC20, IERC20AltApprove, IERC20Metadata, Context
+{
 	string private _name;
 	string private _symbol;
+	uint256 private _totalSupply;
+	mapping(address => uint256) private _balances;
+	mapping(address => mapping(address => uint256)) private _allowances;
+	
 
 	/**
 	* @notice Sets the values for {name} and {symbol}.
@@ -47,10 +50,10 @@ contract ERC20 is Context, IERC20Metadata, IERC20AltApprove {
 	* All two of these values are immutable: they can only be set once during
 	* construction.
 	*/
-	constructor(string memory name_, string memory symbol_)
+	constructor(string memory tokenName, string memory tokenSymbol)
 	{
-		_name = name_;
-		_symbol = symbol_;
+		_name = tokenName;
+		_symbol = tokenSymbol;
 	}
 
 	/**
@@ -156,7 +159,7 @@ contract ERC20 is Context, IERC20Metadata, IERC20AltApprove {
 	/**
 	* @notice See {IERC20-allowance}.
 	*/
-	function allowance(address owner, address spender) override public view virtual returns (uint256)
+	function allowance(address owner, address spender) override(IERC20, IERC20AltApprove) public view virtual returns (uint256)
 	{
 		return _allowances[owner][spender];
 	}

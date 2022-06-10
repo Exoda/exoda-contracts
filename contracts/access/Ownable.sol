@@ -18,8 +18,6 @@ contract Ownable is Context, IOwnable
 {
 	address private _owner;
 
-	/// @inheritdoc IOwnable.OwnershipTransferred
-
 	/**
 	* @notice Throws if called by any account other than the owner.
 	*/

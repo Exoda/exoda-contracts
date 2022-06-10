@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "../../../interfaces/token/ERC20/extensions/IERC20Burnable.sol";
 import "../ERC20.sol";
+import "../../../interfaces/token/ERC20/extensions/IERC20Burnable.sol";
 import "../../../utils/Context.sol";
 
 /**
@@ -10,7 +10,20 @@ import "../../../utils/Context.sol";
 * tokens and those that they have an allowance for, in a way that can be
 * recognized off-chain (via event analysis).
 */
-abstract contract ERC20Burnable is Context, ERC20, IERC20Burnable {
+contract ERC20Burnable is Context, ERC20, IERC20Burnable
+{
+	/**
+	* @notice Sets the values for {name} and {symbol}.
+	*
+	* The default value of {decimals} is 18. To select a different value for
+	* {decimals} you should overload it.
+	*
+	* All two of these values are immutable: they can only be set once during
+	* construction.
+	*/
+	constructor(string memory name_, string memory symbol_) ERC20(name_, symbol_)
+	{} // solhint-disable-line no-empty-blocks
+
 	/**
 	* @notice Destroys `amount` tokens from the caller.
 	*

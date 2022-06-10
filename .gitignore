@@ -8,6 +8,7 @@
 # whitelist
 !/.github/**/*
 !/.husky/**/*
+!/.vscode/**/*
 !/contracts/**/*
 !/docs/**/*
 !/docstatics/**/*

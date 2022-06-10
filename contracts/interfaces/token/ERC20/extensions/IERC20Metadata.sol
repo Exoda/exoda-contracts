@@ -1,12 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "../IERC20.sol";
-
 /// @title ERC20Metadata interface.
 /// @author Ing. Michael Goldfinger
 /// @notice Interface for the optional metadata functions from the ERC20 standard.
-interface IERC20Metadata is IERC20
+interface IERC20Metadata
 {
 	/// @notice Returns the name of the token.
 	/// @return The token name.

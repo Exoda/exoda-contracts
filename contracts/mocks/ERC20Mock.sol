@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import "../token/ERC20/ERC20.sol";
 
-interface IERC20Mock is IERC20Metadata, IERC20AltApprove
+interface IERC20Mock
 {
 	function mockMint(address to, uint256 amount) external;
 	function mockBurn(address account, uint256 amount) external;
