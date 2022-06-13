@@ -3,8 +3,8 @@ import { ethers } from "hardhat";
 import { expect } from "chai";
 import { BigNumber, Contract, ContractFactory } from "ethers";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-import { ADDRESS_ZERO, AdvanceBlock, EmitOnlyThis, StartAutomine, StopAutomine } from "./helpers";
-import { IERC20, IERC20BurnableMock, IERC20AltApprove, IERC20Burnable, IERC20Metadata } from "../typechain-types";
+import { ADDRESS_ZERO, AdvanceBlock, EmitOnlyThis, StartAutomine, StopAutomine } from "../../../helpers";
+import { IERC20, IERC20BurnableMock, IERC20AltApprove, IERC20Burnable, IERC20Metadata } from "../../../../typechain-types";
 
 // * Unit tests are grouped in contexts.
 // * Ever group represents an derived class or interface.

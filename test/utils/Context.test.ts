@@ -1,10 +1,10 @@
 /* eslint-disable node/no-unpublished-import */
 import { ethers } from "hardhat";
 import { expect } from "chai";
-import { ContractFactory } from "ethers";
+import { Contract, ContractFactory } from "ethers";
 import { keccak256, toUtf8Bytes } from "ethers/lib/utils";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-import { IContextMock } from "../typechain-types";
+import { IContextMock } from "../../typechain-types";
 
 // * Unit tests are grouped in contexts.
 // * Ever group represents an derived class or interface.
@@ -18,7 +18,9 @@ describe("Context", () =>
 	let Signers: SignerWithAddress[];
 	let Alice: SignerWithAddress;
 	let Bob: SignerWithAddress;
-	let Context: IContextMock;
+	let Contract: Contract;
+	// Only Mock methods needs to be available everywhere.
+	const ContextMock = () => Contract as IContextMock;
 
 	before(async () =>
 	{
@@ -32,8 +34,8 @@ describe("Context", () =>
 	{
 		beforeEach(async () =>
 		{
-			Context = (await ContextFactory.deploy()) as IContextMock;
-			await Context.deployed();
+			Contract = await ContextFactory.deploy();
+			await Contract.deployed();
 		});
 
 		it("Context.msgData: Should allow to get message data", async () =>
@@ -48,8 +50,8 @@ describe("Context", () =>
 			const encodedParameters = abi.encode(["address", "uint256", "uint32"], [usedAddress, usedUint256, usedUint32]).substring(2);
 			const expectedResult2 = methodId2 + encodedParameters;
 			// Act
-			const result = await Context.mockMsgData();
-			const result2 = await Context.mockMsgData2(usedAddress, usedUint256, usedUint32);
+			const result = await ContextMock().mockMsgData();
+			const result2 = await ContextMock().mockMsgData2(usedAddress, usedUint256, usedUint32);
 			// Assert
 			expect(result).to.equal(methodId);
 			expect(result2).to.equal(expectedResult2);
@@ -59,8 +61,8 @@ describe("Context", () =>
 		{
 			// Arrange
 			// Act
-			const resultAlice = await Context.mockMsgSender();
-			const resultBob = await Context.connect(Bob).mockMsgSender();
+			const resultAlice = await ContextMock().mockMsgSender();
+			const resultBob = await ContextMock().connect(Bob).mockMsgSender();
 			// Assert
 			expect(resultAlice).to.equal(Alice.address);
 			expect(resultBob).to.equal(Bob.address);
