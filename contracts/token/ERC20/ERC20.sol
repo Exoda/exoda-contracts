@@ -159,7 +159,7 @@ contract ERC20 is IERC20, IERC20AltApprove, IERC20Metadata, Context
 	/**
 	* @notice See {IERC20-allowance}.
 	*/
-	function allowance(address owner, address spender) override(IERC20, IERC20AltApprove) public view virtual returns (uint256)
+	function allowance(address owner, address spender) override public view virtual returns (uint256)
 	{
 		return _allowances[owner][spender];
 	}

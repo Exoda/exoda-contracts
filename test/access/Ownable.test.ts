@@ -3,8 +3,8 @@ import { ethers } from "hardhat";
 import { expect } from "chai";
 import { ContractFactory } from "ethers";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-import { ADDRESS_ZERO, EmitOnlyThis } from "./helpers";
-import { IOwnable } from "../typechain-types";
+import { ADDRESS_ZERO, EmitOnlyThis } from "../helpers";
+import { IOwnable } from "../../typechain-types";
 
 // * Unit tests are grouped in contexts.
 // * Ever group represents an derived class or interface.
