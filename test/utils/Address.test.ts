@@ -5,7 +5,6 @@ import { BigNumber, Contract, ContractFactory } from "ethers";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { IAddressMock, ICallReceiverMock } from "../../typechain-types";
 import { PANIC_CODES } from "../helpers";
-import { receiveMessageOnPort } from "worker_threads";
 
 // * Unit tests are grouped in contexts.
 // * Ever group represents an derived class or interface.

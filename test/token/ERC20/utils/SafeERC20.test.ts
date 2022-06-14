@@ -1,7 +1,7 @@
 /* eslint-disable node/no-unpublished-import */
 import { ethers } from "hardhat";
 import { expect } from "chai";
-import { BigNumber, Contract, ContractFactory } from "ethers";
+import { Contract, ContractFactory } from "ethers";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { ERC20NoReturnMock, ERC20ReturnFalseMock, ERC20ReturnTrueMock, ISafeERC20Wrapper } from "../../../../typechain-types";
 
@@ -37,7 +37,7 @@ describe("SafeERC20", () =>
 		Alice = Signers[0];
 	});
 
-	context("with address that has no contract code", async () =>
+	context("this with address that has no contract code", async () =>
 	{
 		beforeEach(async () =>
 		{
@@ -48,7 +48,7 @@ describe("SafeERC20", () =>
 		ShouldRevertOnAllCalls("Address: call to non-contract");
 	});
 
-	context("with token that returns false on all calls", async () =>
+	context("this with token that returns false on all calls", async () =>
 	{
 		beforeEach(async () =>
 		{
@@ -59,7 +59,7 @@ describe("SafeERC20", () =>
 		ShouldRevertOnAllCalls("SafeERC20: ERC20 call failed");
 	});
 
-	context("with token that returns true on all calls", async () =>
+	context("this with token that returns true on all calls", async () =>
 	{
 		beforeEach(async () =>
 		{
@@ -70,76 +70,87 @@ describe("SafeERC20", () =>
 		ShouldOnlyRevertOnErrors();
 	});
 
+	context("this with token that returns nothing on all calls", async () =>
+	{
+		beforeEach(async () =>
+		{
+			Contract = await SafeERC20WrapperFactory.deploy(ERC20NoReturnMock.address);
+			await Contract.deployed();
+		});
+
+		ShouldOnlyRevertOnErrors();
+	});
+
 	function ShouldOnlyRevertOnErrors()
 	{
-		it("Should not revert on transfer", async function ()
+		it("SafeERC20.transfer: Should not revert on transfer", async function ()
 		{
 			await SafeERC20Wrapper().transfer();
 		});
 
-		it("doesn't revert on transferFrom", async function ()
+		it("SafeERC20.transferFrom: Should not revert on transferFrom", async function ()
 		{
 			await SafeERC20Wrapper().transferFrom();
 		});
 
-		describe("approvals", function ()
+		describe("Approvals", function ()
 		{
-			context("with zero allowance", function ()
+			context("this with zero allowance", function ()
 			{
 				beforeEach(async function ()
 				{
 					await SafeERC20Wrapper().setAllowance(0);
 				});
 
-				it("doesn't revert when approving a non-zero allowance", async function ()
+				it("SafeERC20.approve: Should not revert when approving a non-zero allowance", async function ()
 				{
 					await SafeERC20Wrapper().approve(100);
 				});
 
-				it("doesn't revert when approving a zero allowance", async function ()
+				it("SafeERC20.approve: Should not revert when approving a zero allowance", async function ()
 				{
 					await SafeERC20Wrapper().approve(0);
 				});
 
-				it("doesn't revert when increasing the allowance", async function ()
+				it("SafeERC20.increaseAllowance: Should not revert when increasing the allowance", async function ()
 				{
 					await SafeERC20Wrapper().increaseAllowance(10);
 				});
 
-				it("reverts when decreasing the allowance", async function ()
+				it("SafeERC20.approve: Should revert when decreasing the allowance below 0", async function ()
 				{
 					await expect(SafeERC20Wrapper().decreaseAllowance(10)).revertedWith("SafeERC20: reduced allowance <0");
 				});
 			});
 
-			context("with non-zero allowance", function ()
+			context("this with non-zero allowance", function ()
 			{
 				beforeEach(async function ()
 				{
 					await SafeERC20Wrapper().setAllowance(100);
 				});
 
-				it("reverts when approving a non-zero allowance", async function ()
+				it("SafeERC20.approve: Should revert when approving a non-zero allowance", async function ()
 				{
 					await expect(SafeERC20Wrapper().approve(20)).revertedWith("SafeERC20: exploitable approve");
 				});
 
-				it("doesn't revert when approving a zero allowance", async function ()
+				it("SafeERC20.approve: Should not revert when approving a zero allowance", async function ()
 				{
 					await SafeERC20Wrapper().approve(0);
 				});
 
-				it("doesn't revert when increasing the allowance", async function ()
+				it("SafeERC20.increaseAllowance: Should not revert when increasing the allowance", async function ()
 				{
 					await SafeERC20Wrapper().increaseAllowance(10);
 				});
 
-				it("doesn't revert when decreasing the allowance to a positive value", async function ()
+				it("SafeERC20.decreaseAllowance: Should not revert when decreasing the allowance to a positive value", async function ()
 				{
 					await SafeERC20Wrapper().decreaseAllowance(50);
 				});
 
-				it("reverts when decreasing the allowance to a negative value", async function ()
+				it("SafeERC20.decreaseAllowance: Should reverts when decreasing the allowance to a negative value", async function ()
 				{
 					await expect(SafeERC20Wrapper().decreaseAllowance(200)).revertedWith("SafeERC20: reduced allowance <0");
 				});
@@ -149,33 +160,43 @@ describe("SafeERC20", () =>
 
 	function ShouldRevertOnAllCalls(reason: string)
 	{
-		it("Should revert on transfer", async function ()
+		it("SafeERC20.transfer: Should revert on transfer", async function ()
 		{
 			await expect(SafeERC20Wrapper().transfer()).revertedWith(reason);
 		});
 
-		it("Should revert on transferFrom", async function ()
+		it("SafeERC20.transferFrom: Should revert on transferFrom", async function ()
 		{
 			await expect(SafeERC20Wrapper().transferFrom()).revertedWith(reason);
 		});
 
-		it("Should revert on approve", async function ()
+		it("SafeERC20.approve: Should revert on approve", async function ()
 		{
 			await expect(SafeERC20Wrapper().approve(0)).revertedWith(reason);
 		});
 
-		it("Should revert on increaseAllowance", async function ()
+		it("SafeERC20.increaseAllowance: Should revert on increaseAllowance", async function ()
 		{
-			// [TODO] make sure it's reverting for the right reason
-			// await expect(SafeERC20Wrapper().increaseAllowance(0)).revertedWith(reason);
-			await expect(SafeERC20Wrapper().increaseAllowance(0)).to.be.reverted;
+			if (reason.startsWith("Address"))
+			{
+				await expect(SafeERC20Wrapper().increaseAllowance(0)).revertedWith("Transaction reverted: function returned an unexpected amount of data");
+			}
+			else
+			{
+				await expect(SafeERC20Wrapper().increaseAllowance(0)).revertedWith(reason);
+			}
 		});
 
-		it("Should revert on decreaseAllowance", async function ()
+		it("SafeERC20.decreaseAllowance: Should revert on decreaseAllowance", async function ()
 		{
-			// [TODO] make sure it's reverting for the right reason
-			// await expect(SafeERC20Wrapper().decreaseAllowance(0)).revertedWith(reason);
-			await expect(SafeERC20Wrapper().decreaseAllowance(0)).to.be.reverted;
+			if (reason.startsWith("Address"))
+			{
+				await expect(SafeERC20Wrapper().decreaseAllowance(0)).revertedWith("Transaction reverted: function returned an unexpected amount of data");
+			}
+			else
+			{
+				await expect(SafeERC20Wrapper().decreaseAllowance(0)).revertedWith(reason);
+			}
 		});
 	}
 });
