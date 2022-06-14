@@ -63,7 +63,7 @@ NOTE: {value} may be zero.
 #### constructor
 
 ```solidity
-constructor(string name_, string symbol_) public
+constructor(string tokenName, string tokenSymbol) public
 ```
 
 Sets the values for {name} and {symbol}.
