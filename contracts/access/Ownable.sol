@@ -14,7 +14,7 @@ import "../utils/Context.sol";
  * @dev This module is used through inheritance. It will make available the modifier
  * {onlyOwner}, which can be applied to your functions to restrict their use to the owner.
  */
-contract Ownable is Context, IOwnable
+contract Ownable is IOwnable, Context
 {
 	address private _owner;
 
