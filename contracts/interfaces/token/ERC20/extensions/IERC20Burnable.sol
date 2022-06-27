@@ -1,13 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "../IERC20.sol";
+
 /**
  * @title ERC20Burnable interface.
  * @author Ing. Michael Goldfinger
  * @notice Interface for the extension of {ERC20} that allows token holders to destroy both their own tokens
  * and those that they have an allowance for.
  */
-interface IERC20Burnable
+interface IERC20Burnable is IERC20
 {
 	/**
 	* @notice Destroys {amount} tokens from the caller.
