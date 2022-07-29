@@ -10,7 +10,7 @@ import "../../../utils/Context.sol";
 * tokens and those that they have an allowance for, in a way that can be
 * recognized off-chain (via event analysis).
 */
-contract ERC20Burnable is IERC20Burnable, Context, ERC20
+contract ERC20Burnable is Context, ERC20, IERC20Burnable
 {
 	/**
 	* @notice Sets the values for {name} and {symbol}.
