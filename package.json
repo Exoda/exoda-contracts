@@ -1,6 +1,6 @@
 {
 	"name": "@exoda/contracts",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "Secure smart contract library for Solidity",
 	"engines": {
 		"node": ">=16.0.0"
