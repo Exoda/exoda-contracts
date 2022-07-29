@@ -3,7 +3,6 @@ pragma solidity ^0.8.0;
 
 import "../../interfaces/token/ERC20/extensions/IERC20AltApprove.sol";
 import "../../interfaces/token/ERC20/extensions/IERC20Metadata.sol";
-import "../../interfaces/token/ERC20/IERC20.sol";
 import "../../utils/Context.sol";
 
 /**
@@ -32,7 +31,7 @@ import "../../utils/Context.sol";
 * functions have been added to mitigate the well-known issues around setting
 * allowances. See {IERC20-approve}.
 */
-contract ERC20 is IERC20, IERC20AltApprove, IERC20Metadata, Context
+contract ERC20 is IERC20Metadata, IERC20AltApprove, Context
 {
 	uint256 internal _totalSupply;
 	mapping(address => uint256) internal _balances;
