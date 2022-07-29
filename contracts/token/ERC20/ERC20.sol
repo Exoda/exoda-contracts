@@ -34,12 +34,11 @@ import "../../utils/Context.sol";
 */
 contract ERC20 is IERC20, IERC20AltApprove, IERC20Metadata, Context
 {
+	uint256 internal _totalSupply;
+	mapping(address => uint256) internal _balances;
+	mapping(address => mapping(address => uint256)) private _allowances;
 	string private _name;
 	string private _symbol;
-	uint256 private _totalSupply;
-	mapping(address => uint256) private _balances;
-	mapping(address => mapping(address => uint256)) private _allowances;
-	
 
 	/**
 	* @notice Sets the values for {name} and {symbol}.
