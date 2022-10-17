@@ -31,7 +31,7 @@ import "../../utils/Context.sol";
 * functions have been added to mitigate the well-known issues around setting
 * allowances. See {IERC20-approve}.
 */
-contract ERC20 is IERC20Metadata, IERC20AltApprove, Context
+contract ERC20 is Context, IERC20AltApprove, IERC20Metadata
 {
 	uint256 internal _totalSupply;
 	mapping(address => uint256) internal _balances;
