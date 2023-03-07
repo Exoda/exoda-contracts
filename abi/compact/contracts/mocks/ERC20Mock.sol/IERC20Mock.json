@@ -1,0 +1,6 @@
+[
+  "function mockApproveFromZeroAddress(address account, uint256 amount)",
+  "function mockBurn(address account, uint256 amount)",
+  "function mockMint(address to, uint256 amount)",
+  "function mockTransferFromZeroAddress(address to, uint256 amount)"
+]

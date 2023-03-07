@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "../utils/Context.sol";
-import "../interfaces/token/ERC20/IERC20.sol";
+import { Context } from "../utils/Context.sol";
+import { IERC20 } from "../interfaces/token/ERC20/IERC20.sol";
 
 interface IERC20ReturnTrueMock {
 	function setAllowance(uint256 allowance_) external;

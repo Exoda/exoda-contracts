@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "../interfaces/token/ERC20/extensions/IERC20Burnable.sol";
-import "../token/ERC20/extensions/ERC20Burnable.sol";
+import { IERC20Burnable } from "../interfaces/token/ERC20/extensions/IERC20Burnable.sol";
+import { ERC20Burnable } from "../token/ERC20/extensions/ERC20Burnable.sol";
 
 interface IERC20BurnableMock is IERC20Burnable
 {

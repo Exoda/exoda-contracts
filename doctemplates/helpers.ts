@@ -1,5 +1,4 @@
 /* eslint-disable node/no-unpublished-import */
-import { ContractDefinition } from "solidity-ast";
 import { ASTDereferencer, findAll } from "solidity-ast/utils";
 import { DocItemContext, DocItemWithContext, DOC_ITEM_CONTEXT } from "solidity-docgen/dist/site";
 
@@ -38,7 +37,7 @@ export function fileHeader(this: DocItemWithContext)
 
 		let ret = "---\n";
 		ret += `filename: ${purePath}\n`;
-		ret += `type: ${(dic.node as ContractDefinition).contractKind}\n`;
+		ret += `type: ${dic.contract?.contractKind}\n`;
 		ret += "---";
 		return ret;
 	}

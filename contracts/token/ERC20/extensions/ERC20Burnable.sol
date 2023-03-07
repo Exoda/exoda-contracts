@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "../ERC20.sol";
-import "../../../interfaces/token/ERC20/extensions/IERC20Burnable.sol";
-import "../../../utils/Context.sol";
+import { ERC20 } from "../ERC20.sol";
+import { IERC20Burnable } from "../../../interfaces/token/ERC20/extensions/IERC20Burnable.sol";
+import { Context } from "../../../utils/Context.sol";
 
 /**
 * @notice Extension of {ERC20} that allows token holders to destroy both their own

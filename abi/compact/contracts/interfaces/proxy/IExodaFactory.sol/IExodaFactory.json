@@ -1,0 +1,7 @@
+[
+  "event LogDeploy(address indexed master, bytes data, address indexed clone)",
+  "function clonesOf(address master) view returns (address[])",
+  "function clonesOfCount(address master) view returns (uint256)",
+  "function deploy(address master, bytes data, bool useCreate2) payable returns (address)",
+  "function masterOf(address clone) view returns (address)"
+]

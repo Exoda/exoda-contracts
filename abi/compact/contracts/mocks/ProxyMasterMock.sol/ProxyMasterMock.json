@@ -1,0 +1,7 @@
+[
+  "function init(bytes data) payable",
+  "function setValues(uint256 v1, address s2, uint256 v2, bytes v3)",
+  "function value1() view returns (uint256)",
+  "function value2(address) view returns (uint256)",
+  "function value3() view returns (bytes)"
+]

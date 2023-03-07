@@ -1,0 +1,9 @@
+[
+  "function allowance(address owner) view returns (uint256)",
+  "function approve(uint256 amount)",
+  "function decreaseAllowance(uint256 amount)",
+  "function increaseAllowance(uint256 amount)",
+  "function setAllowance(uint256 allowance_)",
+  "function transfer()",
+  "function transferFrom()"
+]

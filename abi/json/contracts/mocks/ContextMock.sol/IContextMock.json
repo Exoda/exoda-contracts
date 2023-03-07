@@ -1,0 +1,57 @@
+[
+  {
+    "inputs": [],
+    "name": "mockMsgData",
+    "outputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "one",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "two",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint32",
+        "name": "three",
+        "type": "uint32"
+      }
+    ],
+    "name": "mockMsgData2",
+    "outputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "mockMsgSender",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

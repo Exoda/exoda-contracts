@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "../utils/Context.sol";
-import "../interfaces/token/ERC20/IERC20.sol";
-import "../token/ERC20/utils/SafeERC20.sol";
-import "./ERC20ReturnTrueMock.sol";
+import { Context } from "../utils/Context.sol";
+import { IERC20 } from "../interfaces/token/ERC20/IERC20.sol";
+import { SafeERC20 } from "../token/ERC20/utils/SafeERC20.sol";
+import { ERC20ReturnTrueMock } from "./ERC20ReturnTrueMock.sol";
 
 interface ISafeERC20Wrapper
 {
@@ -14,7 +14,7 @@ interface ISafeERC20Wrapper
 	function increaseAllowance(uint256 amount) external;
 	function decreaseAllowance(uint256 amount) external;
 	function setAllowance(uint256 allowance_) external;
-	function allowance() external view returns (uint256);
+	function allowance(address owner) external view returns (uint256);
 }
 
 contract SafeERC20Wrapper is ISafeERC20Wrapper, Context
@@ -57,8 +57,8 @@ contract SafeERC20Wrapper is ISafeERC20Wrapper, Context
 		ERC20ReturnTrueMock(address(_token)).setAllowance(allowance_);
 	}
 
-	function allowance() override public view returns (uint256)
+	function allowance(address owner) override public view returns (uint256)
 	{
-		return _token.allowance(address(0), address(0));
+		return _token.allowance(owner, address(0));
 	}
 }

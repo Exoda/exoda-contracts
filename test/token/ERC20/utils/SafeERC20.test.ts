@@ -1,202 +1,442 @@
-/* eslint-disable node/no-unpublished-import */
 import { ethers } from "hardhat";
 import { expect } from "chai";
-import { Contract, ContractFactory } from "ethers";
+import { BigNumber } from "ethers";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-import { ERC20NoReturnMock, ERC20ReturnFalseMock, ERC20ReturnTrueMock, ISafeERC20Wrapper } from "../../../../typechain-types";
+import { SafeERC20Wrapper } from "../../../../typechain-types";
+import { ADDRESS_ZERO } from "../../../helpers";
 
 describe("SafeERC20", () =>
 {
-	let ERC20ReturnFalseMockFactory: ContractFactory;
-	let ERC20ReturnTrueMockFactory: ContractFactory;
-	let ERC20NoReturnMockFactory: ContractFactory;
-	let SafeERC20WrapperFactory: ContractFactory;
-	let Signers: SignerWithAddress[];
-	let Alice: SignerWithAddress;
-	let Contract: Contract;
-	// Only Mock methods needs to be available everywhere.
-	const SafeERC20Wrapper = () => Contract as ISafeERC20Wrapper;
-	// Helper mocks no need to enforce usage of interface here
-	let ERC20ReturnFalseMock: ERC20ReturnFalseMock;
-	let ERC20ReturnTrueMock: ERC20ReturnTrueMock;
-	let ERC20NoReturnMock: ERC20NoReturnMock;
-
-	before(async () =>
+	context("this with address that has no contract code", () =>
 	{
-		ERC20ReturnFalseMockFactory = await ethers.getContractFactory("ERC20ReturnFalseMock");
-		ERC20ReturnTrueMockFactory = await ethers.getContractFactory("ERC20ReturnTrueMock");
-		ERC20NoReturnMockFactory = await ethers.getContractFactory("ERC20NoReturnMock");
-		SafeERC20WrapperFactory = await ethers.getContractFactory("SafeERC20Wrapper");
-		ERC20NoReturnMock = (await ERC20NoReturnMockFactory.deploy()) as ERC20NoReturnMock;
-		ERC20ReturnTrueMock = (await ERC20ReturnTrueMockFactory.deploy()) as ERC20ReturnTrueMock;
-		ERC20ReturnFalseMock = (await ERC20ReturnFalseMockFactory.deploy()) as ERC20ReturnFalseMock;
-		await ERC20NoReturnMock.deployed();
-		await ERC20ReturnTrueMock.deployed();
-		await ERC20ReturnFalseMock.deployed();
-		Signers = await ethers.getSigners();
-		Alice = Signers[0];
+		let SafeERC20Wrapper: SafeERC20Wrapper;
+
+		before(async () =>
+		{
+			const signers = await ethers.getSigners();
+			const alice = signers[0];
+			const safeERC20WrapperFactory = await ethers.getContractFactory("SafeERC20Wrapper");
+			SafeERC20Wrapper = await safeERC20WrapperFactory.deploy(alice.address);
+		});
+
+		it("SafeERC20.transfer: Should revert on transfer", async () =>
+		{
+			// Arrange
+			// Act
+			const result = SafeERC20Wrapper.transfer();
+			// Assert
+			await expect(result).revertedWith("Address: call to non-contract");
+		});
+
+		it("SafeERC20.transferFrom: Should revert on transferFrom", async () =>
+		{
+			// Arrange
+			// Act
+			const result = SafeERC20Wrapper.transferFrom();
+			// Assert
+			await expect(result).revertedWith("Address: call to non-contract");
+		});
+
+		it("SafeERC20.approve: Should revert on zero approve", async () =>
+		{
+			// Arrange
+			// Act
+			const result = SafeERC20Wrapper.approve(0);
+			// Assert
+			await expect(result).revertedWith("Address: call to non-contract");
+		});
+
+		it("SafeERC20.approve: Should revert on value approve", async () =>
+		{
+			// Arrange
+			// Act
+			const result = SafeERC20Wrapper.approve(1);
+			// Assert
+			await expect(result).revertedWithoutReason();
+			// await expect(result).revertedWith("Address: call to non-contract");
+		});
+
+		it("SafeERC20.increaseAllowance: Should revert on increaseAllowance", async () =>
+		{
+			// Arrange
+			// Act
+			const result = SafeERC20Wrapper.increaseAllowance(0);
+			// Assert
+			await expect(result).revertedWithoutReason();
+			// await expect(result).revertedWith("Address: call to non-contract");
+		});
+
+		it("SafeERC20.decreaseAllowance: Should revert on decreaseAllowance", async () =>
+		{
+			// Arrange
+			// Act
+			const result = SafeERC20Wrapper.decreaseAllowance(0);
+			// Assert
+			await expect(result).revertedWithoutReason();
+			// await expect(result).revertedWith("Address: call to non-contract");
+		});
 	});
 
-	context("this with address that has no contract code", async () =>
+	context("this with token that returns false on all calls", () =>
 	{
-		beforeEach(async () =>
+		let SafeERC20Wrapper: SafeERC20Wrapper;
+
+		before(async () =>
 		{
-			Contract = await SafeERC20WrapperFactory.deploy(Alice.address);
-			await Contract.deployed();
+			const erc20ReturnFalseMockFactory = await ethers.getContractFactory("ERC20ReturnFalseMock");
+			const erc20ReturnFalseMock = await erc20ReturnFalseMockFactory.deploy();
+			const safeERC20WrapperFactory = await ethers.getContractFactory("SafeERC20Wrapper");
+			SafeERC20Wrapper = await safeERC20WrapperFactory.deploy(erc20ReturnFalseMock.address);
 		});
 
-		ShouldRevertOnAllCalls("Address: call to non-contract");
+		it("SafeERC20.transfer: Should revert on transfer", async () =>
+		{
+			// Arrange
+			// Act
+			const result = SafeERC20Wrapper.transfer();
+			// Assert
+			await expect(result).revertedWith("SafeERC20: ERC20 call failed");
+		});
+
+		it("SafeERC20.transferFrom: Should revert on transferFrom", async () =>
+		{
+			// Arrange
+			// Act
+			const result = SafeERC20Wrapper.transferFrom();
+			// Assert
+			await expect(result).revertedWith("SafeERC20: ERC20 call failed");
+		});
+
+		it("SafeERC20.approve: Should revert on zero approve", async () =>
+		{
+			// Arrange
+			// Act
+			const result = SafeERC20Wrapper.approve(0);
+			// Assert
+			await expect(result).revertedWith("SafeERC20: ERC20 call failed");
+		});
+
+		it("SafeERC20.approve: Should revert on value approve", async () =>
+		{
+			// Arrange
+			// Act
+			const result = SafeERC20Wrapper.approve(1);
+			// Assert
+			await expect(result).revertedWith("SafeERC20: ERC20 call failed");
+		});
+
+		it("SafeERC20.increaseAllowance: Should revert on increaseAllowance", async () =>
+		{
+			// Arrange
+			// Act
+			const result = SafeERC20Wrapper.increaseAllowance(0);
+			// Assert
+			await expect(result).revertedWith("SafeERC20: ERC20 call failed");
+		});
+
+		it("SafeERC20.decreaseAllowance: Should revert on decreaseAllowance", async () =>
+		{
+			// Arrange
+			// Act
+			const result = SafeERC20Wrapper.decreaseAllowance(0);
+			// Assert
+			await expect(result).revertedWith("SafeERC20: ERC20 call failed");
+		});
 	});
 
-	context("this with token that returns false on all calls", async () =>
+	context("this with token that returns true on all calls", () =>
 	{
-		beforeEach(async () =>
+		let SafeERC20Wrapper: SafeERC20Wrapper;
+
+		before(async () =>
 		{
-			Contract = await SafeERC20WrapperFactory.deploy(ERC20ReturnFalseMock.address);
-			await Contract.deployed();
+			const erc20ReturnFactory = await ethers.getContractFactory("ERC20ReturnTrueMock");
+			const erc20ReturnMock = await erc20ReturnFactory.deploy();
+			const safeERC20WrapperFactory = await ethers.getContractFactory("SafeERC20Wrapper");
+			SafeERC20Wrapper = await safeERC20WrapperFactory.deploy(erc20ReturnMock.address);
 		});
 
-		ShouldRevertOnAllCalls("SafeERC20: ERC20 call failed");
-	});
-
-	context("this with token that returns true on all calls", async () =>
-	{
-		beforeEach(async () =>
+		it("SafeERC20.transfer: Should not revert on transfer", async () =>
 		{
-			Contract = await SafeERC20WrapperFactory.deploy(ERC20ReturnTrueMock.address);
-			await Contract.deployed();
+			// Arrange
+			// Act
+			await SafeERC20Wrapper.transfer();
+			// Assert
+			// Success if no error
 		});
 
-		ShouldOnlyRevertOnErrors();
-	});
-
-	context("this with token that returns nothing on all calls", async () =>
-	{
-		beforeEach(async () =>
+		it("SafeERC20.transferFrom: Should not revert on transferFrom", async () =>
 		{
-			Contract = await SafeERC20WrapperFactory.deploy(ERC20NoReturnMock.address);
-			await Contract.deployed();
+			// Arrange
+			// Act
+			await SafeERC20Wrapper.transferFrom();
+			// Assert
+			// Success if no error
 		});
 
-		ShouldOnlyRevertOnErrors();
-	});
-
-	function ShouldOnlyRevertOnErrors()
-	{
-		it("SafeERC20.transfer: Should not revert on transfer", async function ()
+		describe("Approvals", () =>
 		{
-			await SafeERC20Wrapper().transfer();
-		});
-
-		it("SafeERC20.transferFrom: Should not revert on transferFrom", async function ()
-		{
-			await SafeERC20Wrapper().transferFrom();
-		});
-
-		describe("Approvals", function ()
-		{
-			context("this with zero allowance", function ()
+			context("this with zero allowance", () =>
 			{
-				beforeEach(async function ()
+				beforeEach(async () =>
 				{
-					await SafeERC20Wrapper().setAllowance(0);
+					await SafeERC20Wrapper.setAllowance(0);
 				});
 
-				it("SafeERC20.approve: Should not revert when approving a non-zero allowance", async function ()
+				it("SafeERC20.approve: Should not revert when approving a non-zero allowance", async () =>
 				{
-					await SafeERC20Wrapper().approve(100);
+					// Arrange
+					// Act
+					await SafeERC20Wrapper.approve(100);
+					// Assert
+					// Success if no error
 				});
 
-				it("SafeERC20.approve: Should not revert when approving a zero allowance", async function ()
+				it("SafeERC20.approve: Should not revert when approving a zero allowance", async () =>
 				{
-					await SafeERC20Wrapper().approve(0);
+					// Arrange
+					// Act
+					await SafeERC20Wrapper.approve(0);
+					// Assert
+					// Success if no error
 				});
 
-				it("SafeERC20.increaseAllowance: Should not revert when increasing the allowance", async function ()
+				it("SafeERC20.increaseAllowance: Should not revert when increasing the allowance", async () =>
 				{
-					await SafeERC20Wrapper().increaseAllowance(10);
+					// Arrange
+					// Act
+					await SafeERC20Wrapper.increaseAllowance(10);
+					// Assert
+					// Success if no error
 				});
 
-				it("SafeERC20.approve: Should revert when decreasing the allowance below 0", async function ()
+				it("SafeERC20.approve: Should revert when decreasing the allowance below 0", async () =>
 				{
-					await expect(SafeERC20Wrapper().decreaseAllowance(10)).revertedWith("SafeERC20: reduced allowance <0");
+					// Arrange
+					// Act
+					const result = SafeERC20Wrapper.decreaseAllowance(10);
+					// Assert
+					await expect(result).revertedWith("SafeERC20: reduced allowance <0");
 				});
 			});
 
-			context("this with non-zero allowance", function ()
+			context("this with non-zero allowance", () =>
 			{
-				beforeEach(async function ()
+				beforeEach(async () =>
 				{
-					await SafeERC20Wrapper().setAllowance(100);
+					await SafeERC20Wrapper.setAllowance(100);
 				});
 
-				it("SafeERC20.approve: Should revert when approving a non-zero allowance", async function ()
+				it("SafeERC20.approve: Should revert when approving a non-zero allowance", async () =>
 				{
-					await expect(SafeERC20Wrapper().approve(20)).revertedWith("SafeERC20: exploitable approve");
+					// Arrange
+					// Act
+					const result = SafeERC20Wrapper.approve(20);
+					// Assert
+					await expect(result).revertedWith("SafeERC20: exploitable approve");
 				});
 
-				it("SafeERC20.approve: Should not revert when approving a zero allowance", async function ()
+				it("SafeERC20.approve: Should not revert when approving a zero allowance", async () =>
 				{
-					await SafeERC20Wrapper().approve(0);
+					// Arrange
+					// Act
+					await SafeERC20Wrapper.approve(0);
+					// Assert
+					// Success if no error
 				});
 
-				it("SafeERC20.increaseAllowance: Should not revert when increasing the allowance", async function ()
+				it("SafeERC20.increaseAllowance: Should not revert when increasing the allowance", async () =>
 				{
-					await SafeERC20Wrapper().increaseAllowance(10);
+					// Arrange
+					// Act
+					await SafeERC20Wrapper.increaseAllowance(10);
+					// Assert
+					// Success if no error
 				});
 
-				it("SafeERC20.decreaseAllowance: Should not revert when decreasing the allowance to a positive value", async function ()
+				it("SafeERC20.decreaseAllowance: Should not revert when decreasing the allowance to a positive value", async () =>
 				{
-					await SafeERC20Wrapper().decreaseAllowance(50);
+					// Arrange
+					// Act
+					await SafeERC20Wrapper.decreaseAllowance(50);
+					// Assert
+					// Success if no error
 				});
 
-				it("SafeERC20.decreaseAllowance: Should reverts when decreasing the allowance to a negative value", async function ()
+				it("SafeERC20.decreaseAllowance: Should reverts when decreasing the allowance to a negative value", async () =>
 				{
-					await expect(SafeERC20Wrapper().decreaseAllowance(200)).revertedWith("SafeERC20: reduced allowance <0");
+					// Arrange
+					// Act
+					const result = SafeERC20Wrapper.decreaseAllowance(200);
+					// Assert
+					await expect(result).revertedWith("SafeERC20: reduced allowance <0");
 				});
 			});
 		});
-	}
+	});
 
-	function ShouldRevertOnAllCalls(reason: string)
+	context("this with token that returns nothing on all calls", () =>
 	{
-		it("SafeERC20.transfer: Should revert on transfer", async function ()
+		let SafeERC20Wrapper: SafeERC20Wrapper;
+
+		before(async () =>
 		{
-			await expect(SafeERC20Wrapper().transfer()).revertedWith(reason);
+			const erc20ReturnFactory = await ethers.getContractFactory("ERC20NoReturnMock");
+			const erc20ReturnMock = await erc20ReturnFactory.deploy();
+			const safeERC20WrapperFactory = await ethers.getContractFactory("SafeERC20Wrapper");
+			SafeERC20Wrapper = await safeERC20WrapperFactory.deploy(erc20ReturnMock.address);
 		});
 
-		it("SafeERC20.transferFrom: Should revert on transferFrom", async function ()
+		it("SafeERC20.transfer: Should not revert on transfer", async () =>
 		{
-			await expect(SafeERC20Wrapper().transferFrom()).revertedWith(reason);
+			// Arrange
+			// Act
+			await SafeERC20Wrapper.transfer();
+			// Assert
+			// Success if no error
 		});
 
-		it("SafeERC20.approve: Should revert on approve", async function ()
+		it("SafeERC20.transferFrom: Should not revert on transferFrom", async () =>
 		{
-			await expect(SafeERC20Wrapper().approve(0)).revertedWith(reason);
+			// Arrange
+			// Act
+			await SafeERC20Wrapper.transferFrom();
+			// Assert
+			// Success if no error
 		});
 
-		it("SafeERC20.increaseAllowance: Should revert on increaseAllowance", async function ()
+		describe("Approvals", () =>
 		{
-			if (reason.startsWith("Address"))
+			context("this with zero allowance", () =>
 			{
-				await expect(SafeERC20Wrapper().increaseAllowance(0)).revertedWith("Transaction reverted: function returned an unexpected amount of data");
-			}
-			else
+				beforeEach(async () =>
+				{
+					await SafeERC20Wrapper.setAllowance(0);
+				});
+
+				it("SafeERC20.approve: Should not revert when approving a non-zero allowance", async () =>
+				{
+					// Arrange
+					// Act
+					await SafeERC20Wrapper.approve(100);
+					// Assert
+					// Success if no error
+				});
+
+				it("SafeERC20.approve: Should not revert when approving a zero allowance", async () =>
+				{
+					// Arrange
+					// Act
+					await SafeERC20Wrapper.approve(0);
+					// Assert
+					// Success if no error
+				});
+
+				it("SafeERC20.increaseAllowance: Should not revert when increasing the allowance", async () =>
+				{
+					// Arrange
+					// Act
+					await SafeERC20Wrapper.increaseAllowance(10);
+					// Assert
+					// Success if no error
+				});
+
+				it("SafeERC20.approve: Should revert when decreasing the allowance below 0", async () =>
+				{
+					// Arrange
+					// Act
+					const result = SafeERC20Wrapper.decreaseAllowance(10);
+					// Assert
+					await expect(result).revertedWith("SafeERC20: reduced allowance <0");
+				});
+			});
+
+			context("this with non-zero allowance", () =>
 			{
-				await expect(SafeERC20Wrapper().increaseAllowance(0)).revertedWith(reason);
-			}
+				beforeEach(async () =>
+				{
+					await SafeERC20Wrapper.setAllowance(100);
+				});
+
+				it("SafeERC20.approve: Should revert when approving a non-zero allowance", async () =>
+				{
+					// Arrange
+					// Act
+					const result = SafeERC20Wrapper.approve(20);
+					// Assert
+					await expect(result).revertedWith("SafeERC20: exploitable approve");
+				});
+
+				it("SafeERC20.approve: Should not revert when approving a zero allowance", async () =>
+				{
+					// Arrange
+					// Act
+					await SafeERC20Wrapper.approve(0);
+					// Assert
+					// Success if no error
+				});
+
+				it("SafeERC20.increaseAllowance: Should not revert when increasing the allowance", async () =>
+				{
+					// Arrange
+					// Act
+					await SafeERC20Wrapper.increaseAllowance(10);
+					// Assert
+					// Success if no error
+				});
+
+				it("SafeERC20.decreaseAllowance: Should not revert when decreasing the allowance to a positive value", async () =>
+				{
+					// Arrange
+					// Act
+					await SafeERC20Wrapper.decreaseAllowance(50);
+					// Assert
+					// Success if no error
+				});
+
+				it("SafeERC20.decreaseAllowance: Should reverts when decreasing the allowance to a negative value", async () =>
+				{
+					// Arrange
+					// Act
+					const result = SafeERC20Wrapper.decreaseAllowance(200);
+					// Assert
+					await expect(result).revertedWith("SafeERC20: reduced allowance <0");
+				});
+			});
+		});
+	});
+
+	context("this with token that returns wrong allowance datatype", () =>
+	{
+		let SafeERC20Wrapper: SafeERC20Wrapper;
+		let Alice: SignerWithAddress;
+
+		before(async () =>
+		{
+			const signers = await ethers.getSigners();
+			Alice = signers[0];
+			const erc20ReturnFactory = await ethers.getContractFactory("NonERC20Mock");
+			const erc20ReturnMock = await erc20ReturnFactory.deploy();
+			const safeERC20WrapperFactory = await ethers.getContractFactory("SafeERC20Wrapper");
+			SafeERC20Wrapper = await safeERC20WrapperFactory.deploy(erc20ReturnMock.address);
 		});
 
-		it("SafeERC20.decreaseAllowance: Should revert on decreaseAllowance", async function ()
+		it("SafeERC20.transfer: Should revert on allowance", async () =>
 		{
-			if (reason.startsWith("Address"))
-			{
-				await expect(SafeERC20Wrapper().decreaseAllowance(0)).revertedWith("Transaction reverted: function returned an unexpected amount of data");
-			}
-			else
-			{
-				await expect(SafeERC20Wrapper().decreaseAllowance(0)).revertedWith(reason);
-			}
+			// Arrange
+			// Act
+			const result = SafeERC20Wrapper.allowance(ADDRESS_ZERO);
+			// Assert
+			await expect(result).revertedWith("Forced mock error");
 		});
-	}
+
+		it("SafeERC20.transfer: Should not revert on allowance return type smaller uint256", async () =>
+		{
+			// Arrange
+			// Act
+			const result = await SafeERC20Wrapper.allowance(Alice.address);
+			// await expect(result).revertedWith("Forced mock error");
+			expect(result).to.equal(BigNumber.from(0));
+		});
+	});
 });

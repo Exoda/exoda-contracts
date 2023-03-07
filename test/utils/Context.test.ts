@@ -1,10 +1,8 @@
-/* eslint-disable node/no-unpublished-import */
 import { ethers } from "hardhat";
 import { expect } from "chai";
-import { Contract, ContractFactory } from "ethers";
+import { ContextMock } from "../../typechain-types";
 import { keccak256, toUtf8Bytes } from "ethers/lib/utils";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-import { IContextMock } from "../../typechain-types";
 
 // * Unit tests are grouped in contexts.
 // * Ever group represents an derived class or interface.
@@ -14,30 +12,21 @@ import { IContextMock } from "../../typechain-types";
 // * Tests are ordered by the function name. After that the order should be "Should emit->Should allow->Should not allow".
 describe("Context", () =>
 {
-	let ContextFactory: ContractFactory;
-	let Signers: SignerWithAddress[];
 	let Alice: SignerWithAddress;
 	let Bob: SignerWithAddress;
-	let Contract: Contract;
-	// Only Mock methods needs to be available everywhere.
-	const ContextMock = () => Contract as IContextMock;
+	let ContextMock: ContextMock;
 
 	before(async () =>
 	{
-		ContextFactory = await ethers.getContractFactory("ContextMock");
-		Signers = await ethers.getSigners();
-		Alice = Signers[0];
-		Bob = Signers[1];
+		const contextFactory = await ethers.getContractFactory("ContextMock");
+		ContextMock = await contextFactory.deploy();
+		const signers = await ethers.getSigners();
+		Alice = signers[0];
+		Bob = signers[1];
 	});
 
-	context("this", async () =>
+	context("this", () =>
 	{
-		beforeEach(async () =>
-		{
-			Contract = await ContextFactory.deploy();
-			await Contract.deployed();
-		});
-
 		it("Context.msgData: Should allow to get message data", async () =>
 		{
 			// Arrange
@@ -50,8 +39,8 @@ describe("Context", () =>
 			const encodedParameters = abi.encode(["address", "uint256", "uint32"], [usedAddress, usedUint256, usedUint32]).substring(2);
 			const expectedResult2 = methodId2 + encodedParameters;
 			// Act
-			const result = await ContextMock().mockMsgData();
-			const result2 = await ContextMock().mockMsgData2(usedAddress, usedUint256, usedUint32);
+			const result = await ContextMock.mockMsgData();
+			const result2 = await ContextMock.mockMsgData2(usedAddress, usedUint256, usedUint32);
 			// Assert
 			expect(result).to.equal(methodId);
 			expect(result2).to.equal(expectedResult2);
@@ -61,8 +50,8 @@ describe("Context", () =>
 		{
 			// Arrange
 			// Act
-			const resultAlice = await ContextMock().mockMsgSender();
-			const resultBob = await ContextMock().connect(Bob).mockMsgSender();
+			const resultAlice = await ContextMock.mockMsgSender();
+			const resultBob = await ContextMock.connect(Bob).mockMsgSender();
 			// Assert
 			expect(resultAlice).to.equal(Alice.address);
 			expect(resultBob).to.equal(Bob.address);
