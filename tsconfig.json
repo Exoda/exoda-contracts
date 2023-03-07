@@ -1,5 +1,5 @@
 {
-	"extends": "@tsconfig/node16",
+	"extends": "@tsconfig/node18",
 	// Most ts-node options can be specified here using their programmatic names.
 	"ts-node": {
 		// It is faster to skip typechecking.
@@ -12,15 +12,15 @@
 		}
 	},
 	"compilerOptions": {
-		"target": "ES2022",
+		"target": "ESNext",
 		"module": "CommonJS",
 		"strict": true,
 		"esModuleInterop": true,
 		"outDir": "dist",
-		"declaration": true,
-		"declarationMap": true,
-		"sourceMap": true,
-		"resolveJsonModule": true
+		// "declaration": true,
+		// "declarationMap": true,
+		"sourceMap": true
+		// "resolveJsonModule": true
 	},
 	"exclude": [
 		"dist",
@@ -29,7 +29,7 @@
 		"doctemplates/*.ts",
 		"scripts/*.ts",
 		"test/**/*.ts",
-		"typechain/**/*.ts"
+		"typechain-types/**/*.ts"
 	],
 	"files": [
 		"./hardhat.config.ts"

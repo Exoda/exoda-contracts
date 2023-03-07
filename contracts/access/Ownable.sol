@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "../interfaces/access/IOwnable.sol";
-import "../utils/Context.sol";
+import { IOwnable } from "../interfaces/access/IOwnable.sol";
+import { Context } from "../utils/Context.sol";
 
 /**
  * @title Ownable contract module.

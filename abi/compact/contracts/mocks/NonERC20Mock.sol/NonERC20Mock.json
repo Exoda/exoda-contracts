@@ -1,0 +1,4 @@
+[
+  "function allowance(address owner, address spender) pure returns (uint128)",
+  "function approve(address spender, uint256 amount) pure returns (bool)"
+]

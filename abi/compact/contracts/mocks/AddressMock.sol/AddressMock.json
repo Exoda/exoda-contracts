@@ -1,0 +1,8 @@
+[
+  "event CallReturnValue(string data)",
+  "function functionCall(address target, bytes data, string errorMessage)",
+  "function functionCall(address target, bytes data)",
+  "function functionCallWithValue(address target, bytes data, uint256 value) payable",
+  "function functionCallWithValue(address target, bytes data, uint256 value, string errorMessage) payable",
+  "function isContract(address account) view returns (bool)"
+]

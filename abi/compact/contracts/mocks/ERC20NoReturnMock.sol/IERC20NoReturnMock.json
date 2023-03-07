@@ -1,0 +1,9 @@
+[
+  "function allowance(address owner, address) view returns (uint256)",
+  "function approve(address, uint256)",
+  "function balanceOf(address account) view returns (uint256)",
+  "function setAllowance(uint256 allowance_)",
+  "function totalSupply() view returns (uint256)",
+  "function transfer(address, uint256)",
+  "function transferFrom(address, address, uint256)"
+]

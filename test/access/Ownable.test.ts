@@ -1,10 +1,8 @@
-/* eslint-disable node/no-unpublished-import */
 import { ethers } from "hardhat";
 import { expect } from "chai";
-import { ContractFactory } from "ethers";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import { Ownable } from "../../typechain-types";
 import { ADDRESS_ZERO, EmitOnlyThis } from "../helpers";
-import { IOwnable } from "../../typechain-types";
 
 // * Unit tests are grouped in contexts.
 // * Ever group represents an derived class or interface.
@@ -14,28 +12,26 @@ import { IOwnable } from "../../typechain-types";
 // * Tests are ordered by the function name. After that the order should be "Should emit->Should allow->Should not allow".
 describe("Ownable", () =>
 {
-	let OwnableFactory: ContractFactory;
-	let Signers: SignerWithAddress[];
 	let Alice: SignerWithAddress;
 	let Bob: SignerWithAddress;
 	let Carol: SignerWithAddress;
-	let Ownable: IOwnable;
+	let Ownable: Ownable;
 
 	before(async () =>
 	{
-		OwnableFactory = await ethers.getContractFactory("Ownable");
-		Signers = await ethers.getSigners();
-		Alice = Signers[0];
-		Bob = Signers[1];
-		Carol = Signers[2];
+		const signers = await ethers.getSigners();
+		Alice = signers[0];
+		Bob = signers[1];
+		Carol = signers[2];
 	});
 
-	context("this", async () =>
+	context("this", () =>
 	{
+		// deploy for each test since the deployer/owner is important for the tests.
 		beforeEach(async () =>
 		{
-			Ownable = (await OwnableFactory.deploy()) as IOwnable;
-			await Ownable.deployed();
+			const ownableFactory = await ethers.getContractFactory("Ownable");
+			Ownable = await ownableFactory.deploy();
 		});
 
 		it("Ownable.constructor: Should emit `OwnershipTransferred` event", async () =>

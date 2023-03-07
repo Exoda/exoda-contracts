@@ -1,10 +1,8 @@
-export const BASE_TEN = 10;
+import { BigNumber } from "ethers";
+
+// export const BASE_TEN = 10;
 export const ADDRESS_ZERO = "0x0000000000000000000000000000000000000000";
-export const enum PANIC_CODES {
-	Code_0x01 = "reverted with panic code 0x1 (Assertion error)",
-	Code_0x11 = "reverted with panic code 0x11 (Arithmetic operation underflowed or overflowed outside of an unchecked block)",
-	Code_0x32 = "reverted with panic code 0x32 (Array accessed at an out-of-bounds or negative index)"
-}
+export const UINT256_MAX = BigNumber.from(2).pow(256).sub(1);
 
 export * from "./mine";
 export * from "./time";

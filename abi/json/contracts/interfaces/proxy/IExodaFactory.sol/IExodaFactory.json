@@ -1,0 +1,113 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "contract IInitContract",
+        "name": "master",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      },
+      {
+        "indexed": true,
+        "internalType": "contract IInitContract",
+        "name": "clone",
+        "type": "address"
+      }
+    ],
+    "name": "LogDeploy",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract IInitContract",
+        "name": "master",
+        "type": "address"
+      }
+    ],
+    "name": "clonesOf",
+    "outputs": [
+      {
+        "internalType": "contract IInitContract[]",
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract IInitContract",
+        "name": "master",
+        "type": "address"
+      }
+    ],
+    "name": "clonesOfCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract IInitContract",
+        "name": "master",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bool",
+        "name": "useCreate2",
+        "type": "bool"
+      }
+    ],
+    "name": "deploy",
+    "outputs": [
+      {
+        "internalType": "contract IInitContract",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract IInitContract",
+        "name": "clone",
+        "type": "address"
+      }
+    ],
+    "name": "masterOf",
+    "outputs": [
+      {
+        "internalType": "contract IInitContract",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

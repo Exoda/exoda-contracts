@@ -9,6 +9,7 @@
 !/.github/**/*
 !/.husky/**/*
 !/.vscode/**/*
+!/abi/**/*
 !/contracts/**/*
 !/docs/**/*
 !/docstatics/**/*
@@ -20,6 +21,7 @@
 !/.eslintrc.json
 !/.lintstagedrc.json
 !/.npmignore
+!/.prettierrc.json
 !/.solcover.js
 !/.solhint.json
 !/commitlint.config.js

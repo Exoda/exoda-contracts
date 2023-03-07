@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "../../interfaces/token/ERC20/extensions/IERC20AltApprove.sol";
-import "../../interfaces/token/ERC20/extensions/IERC20Metadata.sol";
-import "../../utils/Context.sol";
+import { IERC20AltApprove } from "../../interfaces/token/ERC20/extensions/IERC20AltApprove.sol";
+import { IERC20Metadata } from "../../interfaces/token/ERC20/extensions/IERC20Metadata.sol";
+import { Context } from "../../utils/Context.sol";
 
 /**
 * @notice Implementation of the {IERC20Metadata} interface.

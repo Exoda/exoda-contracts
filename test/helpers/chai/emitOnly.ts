@@ -2,7 +2,7 @@
 import { expect } from "chai";
 import { Contract, ContractTransaction } from "ethers";
 
-export async function EmitOnlyThis(val: ContractTransaction, contract: Contract, ...eventNames: string[])
+export async function EmitOnlyThis(val: ContractTransaction, contract: Contract, ...eventNames: string[]) : Promise<void>
 {
 	for (const event in contract.interface.events)
 	{

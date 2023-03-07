@@ -26,6 +26,21 @@
 			"error",
 			"unix"
 		],
+		"node/no-unpublished-import": [
+			"off"
+		],
+		"node/no-extraneous-import": [
+			"error",
+			{
+				"allowModules": [
+					"chai",
+					"ethers",
+					"hardhat.etherscan",
+					"solidity-coverage",
+					"@nomiclabs/hardhat-ethers"
+				]
+			}
+		],
 		"node/no-missing-import": ["error", {
 			"allowModules": ["solidity-ast"],
 			"tryExtensions": [

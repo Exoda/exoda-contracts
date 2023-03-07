@@ -1,0 +1,5 @@
+[
+  "function mockMsgData() view returns (bytes)",
+  "function mockMsgData2(address one, uint256 two, uint32 three) returns (bytes)",
+  "function mockMsgSender() view returns (address)"
+]

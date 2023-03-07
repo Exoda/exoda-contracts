@@ -1,0 +1,4 @@
+[
+  "function decreaseAllowance(address spender, uint256 subtractedValue) returns (bool)",
+  "function increaseAllowance(address spender, uint256 addedValue) returns (bool)"
+]
