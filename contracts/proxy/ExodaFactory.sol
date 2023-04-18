@@ -5,7 +5,7 @@ import { IInitContract } from "../interfaces/proxy/IInitContract.sol";
 
 // solhint-disable no-inline-assembly
 contract ExodaFactory is IExodaFactory {
-	mapping(IInitContract => IInitContract) private _masterContractOf;
+	mapping(IInitContract => IInitContract) internal _masterContractOf;
 	mapping(IInitContract => IInitContract[]) private _clonesOf;
 
 	/// @inheritdoc IExodaFactory

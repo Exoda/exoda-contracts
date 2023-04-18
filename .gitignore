@@ -20,6 +20,7 @@
 !/.eslintignore
 !/.eslintrc.json
 !/.lintstagedrc.json
+!/.mocharc.json
 !/.npmignore
 !/.prettierrc.json
 !/.solcover.js
