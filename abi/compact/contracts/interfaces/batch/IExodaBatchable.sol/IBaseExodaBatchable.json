@@ -1,0 +1,4 @@
+[
+  "error BatchError(bytes innerError)",
+  "function batch(bytes[] calls, bool revertOnFail) payable"
+]

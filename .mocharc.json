@@ -1,0 +1,10 @@
+{
+	"extension": [ "ts" ],
+	"require": [ "hardhat/register" ],
+	"full-trace": false,
+	"exit": true,
+	"timeout": 3600000,
+	"parallel": true, // Mocha does not run individual tests in parallel. Mocha runs test files in parallel.
+	// "jobs": 4, // Default is CPU-Cores-1 
+	"spec": "test/**/*.test.ts"
+}
