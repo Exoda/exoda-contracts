@@ -25,7 +25,7 @@ library ExodaERC20 {
 		);
 		require(
 			success && (data.length == 0 || abi.decode(data, (bool))),
-			"BoringERC20: Transfer failed"
+			"ExodaERC20: Transfer failed"
 		);
 	}
 
@@ -46,7 +46,7 @@ library ExodaERC20 {
 		);
 		require(
 			success && (data.length == 0 || abi.decode(data, (bool))),
-			"BoringERC20: TransferFrom failed"
+			"ExodaERC20: TransferFrom failed"
 		);
 	}
 
@@ -91,7 +91,7 @@ library ExodaERC20 {
 		(bool success, bytes memory data) = address(token).staticcall(
 			abi.encodeWithSelector(_SIG_BALANCE_OF, to)
 		);
-		require(success && data.length >= 32, "BoringERC20: BalanceOf failed");
+		require(success && data.length >= 32, "ExodaERC20: BalanceOf failed");
 		amount = abi.decode(data, (uint256));
 	}
 
@@ -106,7 +106,7 @@ library ExodaERC20 {
 		);
 		require(
 			success && data.length >= 32,
-			"BoringERC20: totalSupply failed"
+			"ExodaERC20: totalSupply failed"
 		);
 		totalSupply = abi.decode(data, (uint256));
 	}
